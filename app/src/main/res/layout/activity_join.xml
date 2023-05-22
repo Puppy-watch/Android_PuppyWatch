@@ -23,8 +23,7 @@
         android:id="@+id/join_sv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/join_submit_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/join_tv">
@@ -60,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/roboto_medium"
-                    android:text="사용할 수 없는 아이디입니다."
+                    android:text="(6~15자)"
                     android:textColor="@color/red"
                     android:textSize="11sp" />
 
@@ -96,7 +95,7 @@
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/roboto_regular"
-                        android:hint="아이디 입력 (6~15자)"
+                        android:hint="아이디 입력"
                         android:textColorHint="@color/gray"
                         android:textSize="15sp"
                         tools:ignore="TouchTargetSizeCheck" />
@@ -131,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/roboto_medium"
-                    android:text="20자 이내의 비밀번호를 입력해주세요"
+                    android:text="문자, 숫자, 특수문자 포함 (6 ~ 20자)"
                     android:textColor="@color/red"
                     android:textSize="11sp" />
 
@@ -167,7 +166,7 @@
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/roboto_regular"
-                        android:hint="비밀번호 입력 (문자, 숫자, 특수문자 포함 8~20자)"
+                        android:hint="비밀번호 입력"
                         android:inputType="textPassword"
                         android:textColorHint="@color/gray"
                         android:textSize="15sp"
@@ -204,6 +203,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="비밀번호가 일치하지 않습니다"
+                    android:visibility="invisible"
                     android:textColor="@color/red"
                     android:textSize="11sp" />
 
@@ -371,58 +371,58 @@
 
             </androidx.cardview.widget.CardView>
 
+            <android.widget.Button
+                android:id="@+id/join_submit_btn"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/sign_btn_background"
+                android:fontFamily="@font/roboto_light"
+                android:text="회원가입"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/join_go_login_ll"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/join_go_login_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/join_no_member_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="이미 회원이신가요?"
+                    android:textColor="@color/light_black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/join_go_login_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2.5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="로그인"
+                    android:textColor="@color/main_blue"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <android.widget.Button
-        android:id="@+id/join_submit_btn"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/sign_btn_background"
-        android:fontFamily="@font/roboto_light"
-        android:text="회원가입"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/join_go_login_ll"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/join_go_login_ll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/join_no_member_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="이미 회원이신가요?"
-            android:textColor="@color/light_black"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/join_go_login_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="2.5dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="로그인"
-            android:textColor="@color/main_blue"
-            android:textSize="14sp" />
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
