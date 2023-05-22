@@ -40,8 +40,12 @@ class CalendarAdapter(private val dayList: ArrayList<String>, private val onItem
 
             }
             else {
-                val intent = Intent(holder.act_icon?.context, DetailActivity::class.java)
-                startActivity(holder.act_icon.context, intent, null)
+                holder.act_icon?.context?.let { context ->
+                    val dialog = CustomDialog(context)
+                    dialog.detailInitViews()
+                }
+//                val intent = Intent(holder.act_icon?.context, MainActivity::class.java)
+//                startActivity(holder.act_icon.context, intent, null)
                 Log.d("clickTest", "item position: ${holder.adapterPosition}")
             }
         }
