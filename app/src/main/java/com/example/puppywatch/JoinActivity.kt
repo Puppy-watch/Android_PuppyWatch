@@ -62,22 +62,32 @@ class JoinActivity : AppCompatActivity(), JoinView {
         Log.d("JOIN()", "메소드")
 
         if(binding.joinIdEt.text.toString().isEmpty()) {
+            Toast.makeText(this, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
 
         if(isRegularPW(binding.joinPasswordEt.text.toString()) == false) {
+            Toast.makeText(this, "올바른 비밀번호가 아닙니다.", Toast.LENGTH_SHORT).show()
             return
         }
 
         if(binding.joinPasswordEt.text.toString() != binding.joinPasswordCheckEt.text.toString()) {
+            Toast.makeText(this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if(binding.joinPasswordCheckEt.text.toString() != binding.joinPasswordCheckEt.text.toString()) {
+            Toast.makeText(this, "비밀번호 확인을 입력해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
 
         if(binding.joinUserNameEt.text.toString().isEmpty()) {
+            Toast.makeText(this, "견주 이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
 
         if(binding.joinPuppyNameEt.text.toString().isEmpty()) {
+            Toast.makeText(this, "반려견 이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
 

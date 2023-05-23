@@ -8,3 +8,8 @@ data class UserSign(
     @SerializedName("userName") val userName: String,
     @SerializedName("dogName") val dogName: String
 )
+
+data class User(
+    @SerializedName("userId") val userId: String,
+    @SerializedName("userPw") val userPw: String,
+)

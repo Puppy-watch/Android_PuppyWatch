@@ -59,7 +59,6 @@
                 android:fontFamily="@font/roboto_regular"
                 android:hint="아이디 입력"
                 android:textColorHint="@color/gray"
-                android:inputType="textPassword"
                 android:textSize="15sp"
                 tools:ignore="TouchTargetSizeCheck" />
 

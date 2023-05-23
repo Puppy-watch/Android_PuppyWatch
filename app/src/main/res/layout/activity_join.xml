@@ -59,7 +59,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/roboto_medium"
-                    android:text="(6~15자)"
+                    android:text="아이디 중복 확인"
+                    android:visibility="invisible"
                     android:textColor="@color/red"
                     android:textSize="11sp" />
 
