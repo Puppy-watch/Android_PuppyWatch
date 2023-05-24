@@ -9,6 +9,7 @@ import com.example.puppywatch.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity(), LoginView {
 
+    private final var TAG = "LoginActivity"
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +28,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
     }
 
     private fun login() {
-        Log.d("TAG", "login() 실행")
+        Log.d(TAG, "login() 실행")
 
         if(binding.loginIdEt.text.toString().isEmpty()) {
             Toast.makeText(this, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show()

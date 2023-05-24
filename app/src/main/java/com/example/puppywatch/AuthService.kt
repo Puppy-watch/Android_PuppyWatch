@@ -26,18 +26,20 @@ class AuthService {
         authService.join(user).enqueue(object: Callback<JoinResponse> {
             override fun onResponse(call: Call<JoinResponse>, response: Response<JoinResponse>) {
                 if(response.body() != null) {
-                    Log.d("JOIN/SUCCESS", response.toString())
+                    Log.d(TAG, "JOIN/SUCCESS $response")
 
                     val resp: JoinResponse = response.body()!!
-                    when(resp.code) {
+                    when (resp.code) {
                         200 -> joinView.onJoinSuccess()
                         else -> joinView.onJoinFailure()
                     }
+                } else {
+                    joinView.onJoinFailure()
                 }
             }
 
             override fun onFailure(call: Call<JoinResponse>, t: Throwable) {
-                Log.d("JOIN/FAILURE", t.message.toString())
+                Log.d(TAG, "JOIN/FAILURE" + t.message.toString())
             }
         })
 
@@ -53,10 +55,12 @@ class AuthService {
                     Log.d(TAG, "LOGIN/SUCCESS $response")
 
                     val resp: LoginResponse = response.body()!!
-                    when (val code = resp.code) {
+                    when (resp.code) {
                         200 -> loginView.onLoginSuccess()
                         else -> loginView.onLoginFailure()
                     }
+                } else {
+                    loginView.onLoginFailure()
                 }
             }
 

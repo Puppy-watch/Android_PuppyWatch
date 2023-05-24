@@ -113,7 +113,6 @@ class JoinActivity : AppCompatActivity(), JoinView {
         finish()
     }
 
-    // 여기로 안 넘어옴..
     override fun onJoinFailure() {
         Toast.makeText(this, "회원가입 실패했습니다.", Toast.LENGTH_SHORT).show()
         clearInputText()
