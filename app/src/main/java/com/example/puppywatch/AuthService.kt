@@ -10,6 +10,7 @@ class AuthService {
 
     private lateinit var joinView: JoinView
     private lateinit var loginView: LoginView
+    private lateinit var nowBehaviorView: NowBehaviorView
 
     fun setJoinView(joinView: JoinView) {
         this.joinView = joinView
@@ -17,6 +18,10 @@ class AuthService {
 
     fun setLoginView(loginView: LoginView) {
         this.loginView = loginView
+    }
+
+    fun setNowBehaviorView(nowBehaviorView: NowBehaviorView) {
+        this.nowBehaviorView = nowBehaviorView
     }
 
 
@@ -70,5 +75,31 @@ class AuthService {
         })
 
         Log.d("LOGIN()/", "메소드")
+    }
+
+    fun nowBehavior(dog_idx: Int) {
+        val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
+
+        authService.nowBehavior(dog_idx).enqueue(object : Callback<NowBehaviorResponse> {
+            override fun onResponse(call: Call<NowBehaviorResponse>, response: Response<NowBehaviorResponse>) {
+                if(response.body() != null) {
+                    Log.d(TAG, "NowBehavior/SUCCESS $response")
+
+                    val resp: NowBehaviorResponse = response.body()!!
+                    when (resp.code) {
+                        200 -> nowBehaviorView.onNowBehaviorSuccess()
+                        else -> nowBehaviorView.onNowBehaviorFailure()
+                    }
+                } else {
+                    nowBehaviorView.onNowBehaviorFailure()
+                }
+            }
+
+            override fun onFailure(call: Call<NowBehaviorResponse>, t: Throwable) {
+                Log.d(TAG, "NowBehavior/FAILURE" + t.message.toString())
+            }
+        })
+
+        Log.d("NowBehavior()/", "메소드")
     }
 }

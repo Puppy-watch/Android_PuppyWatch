@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.example.puppywatch.databinding.ActivityMainBinding
@@ -14,7 +15,7 @@ import java.time.YearMonth
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NowBehaviorView {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var  selectedData: LocalDate
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         selectedData = LocalDate.now()
         weekView()
+        nowBehavior()
 
         binding.mainGoMyPageIv.setOnClickListener {
             val intent = Intent(this, MyPageActivity::class.java)
@@ -56,6 +58,12 @@ class MainActivity : AppCompatActivity() {
 
         val nWeek: Int = cal.get(Calendar.DAY_OF_WEEK)
         val day_list = ArrayList<String>()
+
+        val month_of_year = cal.get(Calendar.MONTH)+1
+        val week_of_month = cal.get(Calendar.WEEK_OF_MONTH)
+
+        //N월 N째주
+        binding.weekday.text = month_of_year.toString() + "월 "+week_of_month.toString()+"번째 주"
 
         for (i in 0..14) {
             val calendar = cal.clone() as Calendar
@@ -114,5 +122,34 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return dayList
+    }
+
+    private fun nowBehavior() {
+        Log.d("NowBehavior()", "메소드")
+
+        val authService = AuthService()
+        authService.setNowBehaviorView(this)
+        authService.nowBehavior(1)
+        changeIcon("sit")
+    }
+
+    override fun onNowBehaviorSuccess() {
+        Log.d("NowBehaviorSuccess", "성공")
+    }
+    override fun onNowBehaviorFailure() {
+        Log.d("NowBehaviorFailure", "실패")
+    }
+
+    public fun changeIcon(act:String) {
+        when(act) {
+            "walk" -> binding.currentActImg.setImageResource(R.drawable.ic_main_walk)
+            "run" -> binding.currentActImg.setImageResource(R.drawable.ic_main_run)
+            "bite" -> binding.currentActImg.setImageResource(R.drawable.ic_main_bite)
+            "lie" -> binding.currentActImg.setImageResource(R.drawable.ic_main_lie)
+            "stand" -> binding.currentActImg.setImageResource(R.drawable.ic_main_stand)
+            "walk" -> binding.currentActImg.setImageResource(R.drawable.ic_main_walk)
+            "sit" -> binding.currentActImg.setImageResource(R.drawable.ic_main_sit)
+            "eat" -> binding.currentActImg.setImageResource(R.drawable.ic_main_eat)
+        }
     }
 }
