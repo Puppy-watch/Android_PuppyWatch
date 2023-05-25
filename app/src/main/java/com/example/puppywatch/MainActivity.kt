@@ -4,10 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.puppywatch.databinding.ActivityMainBinding
 import java.text.DateFormat
@@ -17,7 +14,7 @@ import java.time.YearMonth
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MainActivity : AppCompatActivity(),NowBehavView,  MostBehavView {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var  selectedData: LocalDate
@@ -30,8 +27,6 @@ class MainActivity : AppCompatActivity(),NowBehavView,  MostBehavView {
 
         selectedData = LocalDate.now()
         weekView()
-        nowBehav()
-        mostBehav()
 
         binding.mainGoMyPageIv.setOnClickListener {
             val intent = Intent(this, MyPageActivity::class.java)
@@ -61,13 +56,6 @@ class MainActivity : AppCompatActivity(),NowBehavView,  MostBehavView {
 
         val nWeek: Int = cal.get(Calendar.DAY_OF_WEEK)
         val day_list = ArrayList<String>()
-
-
-        val month_of_year = cal.get(Calendar.MONTH)+1
-        val week_of_month = cal.get(Calendar.WEEK_OF_MONTH)
-
-        //N월 N째주
-        binding.weekday.text = month_of_year.toString() + "월 "+week_of_month.toString()+"번째 주"
 
         for (i in 0..14) {
             val calendar = cal.clone() as Calendar
@@ -111,6 +99,7 @@ class MainActivity : AppCompatActivity(),NowBehavView,  MostBehavView {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun dayInMonthArray(date: LocalDate): ArrayList<String> {
 
+        var numOfBlank = 0
         var dayList = ArrayList<String>()
         var yearMonth = YearMonth.from(date)
         var firstDay = date.withDayOfMonth(1)
@@ -126,51 +115,4 @@ class MainActivity : AppCompatActivity(),NowBehavView,  MostBehavView {
         }
         return dayList
     }
-
-    private fun nowBehav() {
-        Log.d("NowBehavior()", "메소드")
-
-        val authService = AuthService()
-        authService.setNowBehavView(this)
-        authService.nowBehav()
-
-
-    }
-
-    private fun mostBehav() {
-        Log.d("mostBehavior()", "메소드")
-
-        val authService = AuthService()
-        authService.setMostBehavView(this)
-        authService.mostBehav()
-
-    }
-
-
-    override fun NowBehavSuccess() {
-        Toast.makeText(this, "성공.", Toast.LENGTH_SHORT).show()
-    }
-    override fun NowBehavFailure() {
-        Toast.makeText(this, "실패.", Toast.LENGTH_SHORT).show()
-    }
-    override fun MostBehavSuccess() {
-        Toast.makeText(this, "성공.", Toast.LENGTH_SHORT).show()
-    }
-    override fun MostBehavFailure() {
-        Toast.makeText(this, "실패.", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun changeIcon(act:String) {
-        when(act) {
-            "walk" -> binding.currentActImg.setImageResource(R.drawable.ic_main_walk)
-            "run" -> binding.currentActImg.setImageResource(R.drawable.ic_main_run)
-            "bite" -> binding.currentActImg.setImageResource(R.drawable.ic_main_bite)
-            "lie" -> binding.currentActImg.setImageResource(R.drawable.ic_main_lie)
-            "stand" -> binding.currentActImg.setImageResource(R.drawable.ic_main_stand)
-            "walk" -> binding.currentActImg.setImageResource(R.drawable.ic_main_walk)
-            "sit" -> binding.currentActImg.setImageResource(R.drawable.ic_main_sit)
-            else -> binding.currentActImg.setImageResource(R.drawable.ic_main_eat)
-        }
-    }
-
 }
