@@ -20,6 +20,12 @@ interface AuthRetrofitInterface {
         @Body user: User
     ): Call<LoginResponse>
 
+    // 아이디 중복 체크
+    @POST("/checkId")
+    fun checkId(
+        @Body user: UserIdCheck
+    ): Call<CheckIdResponse>
+
     // 현재 행동 라벨
     @GET("/behavior")
     fun nowBehavior(

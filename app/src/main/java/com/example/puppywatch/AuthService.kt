@@ -2,10 +2,7 @@ package com.example.puppywatch
 
 import android.util.Log
 import com.example.puppywatch.response.*
-import com.example.puppywatch.view.JoinView
-import com.example.puppywatch.view.LoginView
-import com.example.puppywatch.view.MostBehaviorView
-import com.example.puppywatch.view.NowBehaviorView
+import com.example.puppywatch.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,6 +12,7 @@ class AuthService {
 
     private lateinit var joinView: JoinView
     private lateinit var loginView: LoginView
+    private lateinit var checkIdView: CheckIdView
     private lateinit var nowBehaviorView: NowBehaviorView
     private lateinit var mostBehaviorView: MostBehaviorView
 
@@ -25,6 +23,10 @@ class AuthService {
 
     fun setLoginView(loginView: LoginView) {
         this.loginView = loginView
+    }
+
+    fun setCheckIdView(checkIdView: CheckIdView) {
+        this.checkIdView = checkIdView
     }
 
     fun setNowBehaviorView(nowBehaviorView: NowBehaviorView) {
@@ -81,6 +83,32 @@ class AuthService {
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Log.d(TAG, "LOGIN/FAILURE" + t.message.toString())
+            }
+        })
+
+        Log.d("LOGIN()/", "메소드")
+    }
+
+    fun checkID(user: UserIdCheck) {
+        val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
+
+        authService.checkId(user).enqueue(object : Callback<CheckIdResponse> {
+            override fun onResponse(call: Call<CheckIdResponse>, response: Response<CheckIdResponse>) {
+                if(response.body() != null) {
+                    Log.d(TAG, "CheckId/SUCCESS $response")
+
+                    val resp: CheckIdResponse = response.body()!!
+                    when (resp.code) {
+                        200 -> checkIdView.onCheckIdSuccess(resp.code)
+                        else -> checkIdView.onCheckIdFailure()
+                    }
+                } else {
+                    checkIdView.onCheckIdFailure()
+                }
+            }
+
+            override fun onFailure(call: Call<CheckIdResponse>, t: Throwable) {
+                Log.d(TAG, "CheckId/FAILURE" + t.message.toString())
             }
         })
 
