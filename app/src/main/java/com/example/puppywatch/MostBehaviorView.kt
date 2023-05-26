@@ -1,6 +1,6 @@
 package com.example.puppywatch
 
 interface MostBehaviorView {
-    fun onMostBehaviorSuccess()
+    fun onMostBehaviorSuccess(data: List<ListData>)
     fun onMostBehaviorFailure()
 }
