@@ -18,6 +18,7 @@ class AuthService {
     private lateinit var nowBehaviorView: NowBehaviorView
     private lateinit var mostBehaviorView: MostBehaviorView
 
+
     fun setJoinView(joinView: JoinView) {
         this.joinView = joinView
     }
@@ -119,10 +120,10 @@ class AuthService {
             override fun onResponse(call: Call<MostBehaviorResponse>, response: Response<MostBehaviorResponse>) {
                 if(response.body() != null) {
                     Log.d(TAG, "MostBehavior/SUCCESS $response")
-
                     val resp: MostBehaviorResponse = response.body()!!
+                    Log.d("testttttt",resp.data.toString())
                     when (resp.code) {
-                        200 -> mostBehaviorView.onMostBehaviorSuccess(resp.data!!)
+                        200 -> mostBehaviorView.onMostBehaviorSuccess(resp.data)
                         else -> mostBehaviorView.onMostBehaviorFailure()
                     }
                 } else {

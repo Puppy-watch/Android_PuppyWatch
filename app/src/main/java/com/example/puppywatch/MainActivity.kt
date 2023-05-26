@@ -113,7 +113,6 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun dayInMonthArray(date: LocalDate): ArrayList<String> {
 
-        var numOfBlank = 0
         var dayList = ArrayList<String>()
         var yearMonth = YearMonth.from(date)
         var firstDay = date.withDayOfMonth(1)
@@ -143,7 +142,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         Log.d("MostBehavior()", "메소드")
 
         val authService = AuthService()
-        authService.setNowBehaviorView(this)
+        authService.setMostBehaviorView(this)
         authService.mostBehavior(1)
     }
 
@@ -156,9 +155,9 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         Log.d("NowBehaviorFailure", "실패")
     }
 
-    override fun onMostBehaviorSuccess(data: ListData) {
+    override fun onMostBehaviorSuccess(data: List<ListData>) {
         Log.d("MostBehaviorSuccess", "성공")
-        makeWeekIcon(data.Date, data.mostBehav)
+        makeWeekIcon(data)
     }
     override fun onMostBehaviorFailure() {
         Log.d("MostBehaviorFailure", "실패")
@@ -194,7 +193,8 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
     }
 
     //주간 아이콘 변경
-    fun makeWeekIcon(data : String, act: String){
+    fun makeWeekIcon(data : List<ListData>){
+        Log.d("test",data.toString())
 
         //MostBehaviorList[i].Date로 접근 가능
         val cal = Calendar.getInstance()
@@ -221,6 +221,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         WeekImageViewList.add(binding.mainIcon7)
 
 
+
         var WeekList = ArrayList<String>()
         for (i in WeekTextViewList) {
             if (i.getText().toString().toInt() < 10) {
@@ -234,10 +235,11 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         for (item in data) {
             for (i in 0..6) {
                 if (item.Date == WeekList[i]) {
-                    changeOrangeIcon(act, WeekImageViewList[i])
-                }
-                else {
-                    WeekImageViewList[i].setImageResource(0)
+                    Log.d("test",item.Date)
+                    Log.d("test",WeekList[i])
+                    Log.d("test",item.mostBehav)
+                    changeOrangeIcon(item.mostBehav, WeekImageViewList[i])
+
                 }
 
             }
