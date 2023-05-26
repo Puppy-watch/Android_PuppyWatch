@@ -111,4 +111,31 @@ class AuthService {
 
         Log.d("NowBehavior()/", "메소드")
     }
+
+    fun mostBehavior(dog_idx: Int) {
+        val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
+
+        authService.mostBehavior(dog_idx).enqueue(object : Callback<MostBehaviorResponse> {
+            override fun onResponse(call: Call<MostBehaviorResponse>, response: Response<MostBehaviorResponse>) {
+                if(response.body() != null) {
+                    Log.d(TAG, "MostBehavior/SUCCESS $response")
+
+                    val resp: MostBehaviorResponse = response.body()!!
+                    when (resp.code) {
+                        200 -> mostBehaviorView.onMostBehaviorSuccess(resp.data!!)
+                        else -> mostBehaviorView.onMostBehaviorFailure()
+                    }
+                } else {
+                    mostBehaviorView.onMostBehaviorFailure()
+                }
+            }
+
+            override fun onFailure(call: Call<MostBehaviorResponse>, t: Throwable) {
+                Log.d(TAG, "MostBehavior/FAILURE" + t.message.toString())
+            }
+        })
+
+        Log.d("MostBehavior()/", "메소드")
+    }
+
 }

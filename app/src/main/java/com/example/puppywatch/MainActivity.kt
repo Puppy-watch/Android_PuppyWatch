@@ -5,9 +5,12 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.example.puppywatch.databinding.ActivityMainBinding
+import com.example.puppywatch.response.ListData
+import com.example.puppywatch.view.MostBehaviorView
 import com.example.puppywatch.view.NowBehaviorView
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -16,7 +19,7 @@ import java.time.YearMonth
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MainActivity : AppCompatActivity(), NowBehaviorView {
+class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var  selectedData: LocalDate
@@ -30,6 +33,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView {
         selectedData = LocalDate.now()
         weekView()
         nowBehavior()
+        mostBehavior()
 
         binding.mainGoMyPageIv.setOnClickListener {
             val intent = Intent(this, MyPageActivity::class.java)
@@ -49,6 +53,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView {
         }
     }
 
+    // 주간 달력 만들기
     @RequiresApi(Build.VERSION_CODES.O)
     fun weekView(){
 
@@ -134,6 +139,14 @@ class MainActivity : AppCompatActivity(), NowBehaviorView {
         changeIcon("sit")
     }
 
+    private fun mostBehavior() {
+        Log.d("MostBehavior()", "메소드")
+
+        val authService = AuthService()
+        authService.setNowBehaviorView(this)
+        authService.mostBehavior(1)
+    }
+
     override fun onNowBehaviorSuccess(nowBehav: String) {
         Log.d("nowBehav 현재 행동", nowBehav)
         changeIcon(nowBehav)
@@ -143,7 +156,16 @@ class MainActivity : AppCompatActivity(), NowBehaviorView {
         Log.d("NowBehaviorFailure", "실패")
     }
 
-    public fun changeIcon(act:String) {
+    override fun onMostBehaviorSuccess(data: ListData) {
+        Log.d("MostBehaviorSuccess", "성공")
+        makeWeekIcon(data.Date, data.mostBehav)
+    }
+    override fun onMostBehaviorFailure() {
+        Log.d("MostBehaviorFailure", "실패")
+    }
+
+    // 현재 행동 아이콘
+    fun changeIcon(act:String) {
         when(act) {
             "walk" -> binding.currentActImg.setImageResource(R.drawable.ic_main_walk)
             "run" -> binding.currentActImg.setImageResource(R.drawable.ic_main_run)
@@ -153,6 +175,72 @@ class MainActivity : AppCompatActivity(), NowBehaviorView {
             "walk" -> binding.currentActImg.setImageResource(R.drawable.ic_main_walk)
             "sit" -> binding.currentActImg.setImageResource(R.drawable.ic_main_sit)
             "eat" -> binding.currentActImg.setImageResource(R.drawable.ic_main_eat)
+        }
+    }
+
+    //배경이 주황색인 아이콘으로 변경
+    fun changeOrangeIcon(act: String, iconId: ImageView) {
+        when (act) {
+            "walk" -> iconId.setImageResource(R.drawable.ic_cal_walk)
+            "run" -> iconId.setImageResource(R.drawable.ic_cal_run)
+            "bite" -> iconId.setImageResource(R.drawable.ic_cal_bite)
+            "lie" -> iconId.setImageResource(R.drawable.ic_cal_lie)
+            "stand" -> iconId.setImageResource(R.drawable.ic_cal_stand)
+            "walk" -> iconId.setImageResource(R.drawable.ic_cal_walk)
+            "sit" -> iconId.setImageResource(R.drawable.ic_cal_sit)
+            else -> iconId.setImageResource(R.drawable.ic_cal_eat)
+        }
+
+    }
+
+    //주간 아이콘 변경
+    fun makeWeekIcon(data : String, act: String){
+
+        //MostBehaviorList[i].Date로 접근 가능
+        val cal = Calendar.getInstance()
+        val df: DateFormat = SimpleDateFormat("yyyy-MM-")
+        val currentDate = cal.time
+        val date = df.format(currentDate)
+
+        var WeekTextViewList = ArrayList<TextView>()
+        WeekTextViewList.add(binding.mainDate1)
+        WeekTextViewList.add(binding.mainDate2)
+        WeekTextViewList.add(binding.mainDate3)
+        WeekTextViewList.add(binding.mainDate4)
+        WeekTextViewList.add(binding.mainDate5)
+        WeekTextViewList.add(binding.mainDate6)
+        WeekTextViewList.add(binding.mainDate7)
+
+        var WeekImageViewList = ArrayList<ImageView>()
+        WeekImageViewList.add(binding.mainIcon1)
+        WeekImageViewList.add(binding.mainIcon2)
+        WeekImageViewList.add(binding.mainIcon3)
+        WeekImageViewList.add(binding.mainIcon4)
+        WeekImageViewList.add(binding.mainIcon5)
+        WeekImageViewList.add(binding.mainIcon6)
+        WeekImageViewList.add(binding.mainIcon7)
+
+
+        var WeekList = ArrayList<String>()
+        for (i in WeekTextViewList) {
+            if (i.getText().toString().toInt() < 10) {
+                WeekList.add(date + "0" + i.getText().toString())
+            } else {
+                WeekList.add(date + i.getText().toString())
+            }
+        }
+
+        //통계값에서 이번 주에 해당하는 날짜 값만
+        for (item in data) {
+            for (i in 0..6) {
+                if (item.Date == WeekList[i]) {
+                    changeOrangeIcon(act, WeekImageViewList[i])
+                }
+                else {
+                    WeekImageViewList[i].setImageResource(0)
+                }
+
+            }
         }
     }
 }
