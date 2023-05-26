@@ -7,6 +7,7 @@ data class MostBehaviorResponse (
     @SerializedName("data") val data: List<ListData>,
     @SerializedName("message") val message: String
 )
+
 data class ListData (
     @SerializedName("Date") val Date: String,
     @SerializedName("mostBehav") val mostBehav: String
