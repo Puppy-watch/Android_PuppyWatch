@@ -235,9 +235,6 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         for (item in data) {
             for (i in 0..6) {
                 if (item.Date == WeekList[i]) {
-                    Log.d("test",item.Date)
-                    Log.d("test",WeekList[i])
-                    Log.d("test",item.mostBehav)
                     changeOrangeIcon(item.mostBehav, WeekImageViewList[i])
 
                 }
