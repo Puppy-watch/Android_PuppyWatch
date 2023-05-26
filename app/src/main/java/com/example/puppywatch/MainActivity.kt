@@ -12,6 +12,7 @@ import com.example.puppywatch.databinding.ActivityMainBinding
 import com.example.puppywatch.response.ListData
 import com.example.puppywatch.view.MostBehaviorView
 import com.example.puppywatch.view.NowBehaviorView
+import com.example.puppywatch.view.onCalendarView
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         weekView()
         nowBehavior()
         mostBehavior()
+
 
         binding.mainGoMyPageIv.setOnClickListener {
             val intent = Intent(this, MyPageActivity::class.java)
@@ -162,6 +164,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
     override fun onMostBehaviorFailure() {
         Log.d("MostBehaviorFailure", "실패")
     }
+
 
     // 현재 행동 아이콘
     fun changeIcon(act:String) {

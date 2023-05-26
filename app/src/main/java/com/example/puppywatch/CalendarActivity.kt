@@ -6,7 +6,6 @@ import android.widget.Toast
 
 import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.puppywatch.databinding.ActivityCalendarBinding
@@ -46,7 +45,7 @@ class CalendarActivity : ComponentActivity(),OnItemListener {
         binding.monthText.text = monthYearfromDate(selectedData)
 
         val dayList = dayInMonthArray(selectedData)
-        val adapter = CalendarAdapter(dayList, this)
+        val adapter = onCalendarAdapter(dayList, this)
         var manager: RecyclerView.LayoutManager = GridLayoutManager(applicationContext,7)
 
         binding.recylerView.layoutManager = manager

@@ -2,10 +2,7 @@ package com.example.puppywatch
 
 import android.util.Log
 import com.example.puppywatch.response.*
-import com.example.puppywatch.view.JoinView
-import com.example.puppywatch.view.LoginView
-import com.example.puppywatch.view.MostBehaviorView
-import com.example.puppywatch.view.NowBehaviorView
+import com.example.puppywatch.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -121,9 +118,9 @@ class AuthService {
                 if(response.body() != null) {
                     Log.d(TAG, "MostBehavior/SUCCESS $response")
                     val resp: MostBehaviorResponse = response.body()!!
-                    Log.d("testttttt",resp.data.toString())
+
                     when (resp.code) {
-                        200 -> mostBehaviorView.onMostBehaviorSuccess(resp.data)
+                        200 -> {mostBehaviorView.onMostBehaviorSuccess(resp.data)}
                         else -> mostBehaviorView.onMostBehaviorFailure()
                     }
                 } else {
@@ -138,5 +135,6 @@ class AuthService {
 
         Log.d("MostBehavior()/", "메소드")
     }
+
 
 }
