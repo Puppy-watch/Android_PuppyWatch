@@ -1,4 +1,4 @@
-package com.example.puppywatch
+package com.example.puppywatch.response
 
 import com.google.gson.annotations.SerializedName
 

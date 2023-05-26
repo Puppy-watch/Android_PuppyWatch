@@ -1,4 +1,4 @@
-package com.example.puppywatch
+package com.example.puppywatch.view
 
 interface LoginView {
     fun onLoginSuccess()

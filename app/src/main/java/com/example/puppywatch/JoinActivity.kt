@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.puppywatch.response.UserSign
 import com.example.puppywatch.databinding.ActivityJoinBinding
+import com.example.puppywatch.view.JoinView
 import java.util.regex.Pattern
 
 class JoinActivity : AppCompatActivity(), JoinView {

@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.puppywatch.response.User
 import com.example.puppywatch.databinding.ActivityLoginBinding
+import com.example.puppywatch.view.LoginView
 
 class LoginActivity : AppCompatActivity(), LoginView {
 

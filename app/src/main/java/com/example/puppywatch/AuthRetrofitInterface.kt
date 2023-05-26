@@ -1,5 +1,6 @@
 package com.example.puppywatch
 
+import com.example.puppywatch.response.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -24,4 +25,10 @@ interface AuthRetrofitInterface {
     fun nowBehavior(
         @Query("dog_idx") dog_idx: Int
     ) : Call<NowBehaviorResponse>
+
+    //가장 많이 한 행동
+    @GET("/mostBehav")
+    fun mostBehavior(
+        @Query("dog_idx") dog_idx: Int
+    ) : Call<MostBehaviorResponse>
 }

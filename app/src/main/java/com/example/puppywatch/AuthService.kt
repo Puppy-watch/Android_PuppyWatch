@@ -1,6 +1,11 @@
 package com.example.puppywatch
 
 import android.util.Log
+import com.example.puppywatch.response.*
+import com.example.puppywatch.view.JoinView
+import com.example.puppywatch.view.LoginView
+import com.example.puppywatch.view.MostBehaviorView
+import com.example.puppywatch.view.NowBehaviorView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -11,6 +16,7 @@ class AuthService {
     private lateinit var joinView: JoinView
     private lateinit var loginView: LoginView
     private lateinit var nowBehaviorView: NowBehaviorView
+    private lateinit var mostBehaviorView: MostBehaviorView
 
     fun setJoinView(joinView: JoinView) {
         this.joinView = joinView
@@ -24,6 +30,9 @@ class AuthService {
         this.nowBehaviorView = nowBehaviorView
     }
 
+    fun setMostBehaviorView(mostBehaviorView: MostBehaviorView) {
+        this.mostBehaviorView = mostBehaviorView
+    }
 
     fun join(user: UserSign) {
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
@@ -87,7 +96,7 @@ class AuthService {
 
                     val resp: NowBehaviorResponse = response.body()!!
                     when (resp.code) {
-                        200 -> nowBehaviorView.onNowBehaviorSuccess()
+                        200 -> nowBehaviorView.onNowBehaviorSuccess(resp.nowBehav!!)
                         else -> nowBehaviorView.onNowBehaviorFailure()
                     }
                 } else {

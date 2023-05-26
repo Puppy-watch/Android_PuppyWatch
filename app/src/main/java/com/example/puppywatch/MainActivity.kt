@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.example.puppywatch.databinding.ActivityMainBinding
+import com.example.puppywatch.view.NowBehaviorView
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -133,7 +134,9 @@ class MainActivity : AppCompatActivity(), NowBehaviorView {
         changeIcon("sit")
     }
 
-    override fun onNowBehaviorSuccess() {
+    override fun onNowBehaviorSuccess(nowBehav: String) {
+        Log.d("nowBehav 현재 행동", nowBehav)
+        changeIcon(nowBehav)
         Log.d("NowBehaviorSuccess", "성공")
     }
     override fun onNowBehaviorFailure() {
