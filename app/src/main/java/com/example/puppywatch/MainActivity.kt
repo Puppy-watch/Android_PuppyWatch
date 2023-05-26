@@ -165,6 +165,12 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
     override fun onNowBehaviorFailure() {
         Log.d("NowBehaviorFailure", "실패")
     }
+    override fun onMostBehaviorSuccess() {
+        Log.d("MostBehaviorSuccess", "성공")
+    }
+    override fun onMostBehaviorFailure() {
+        Log.d("MostBehaviorFailure", "실패")
+    }
 
     override fun onMostBehaviorSuccess(data: List<ListData>) {
         Log.d("MostBehaviorSuccess", "성공")
