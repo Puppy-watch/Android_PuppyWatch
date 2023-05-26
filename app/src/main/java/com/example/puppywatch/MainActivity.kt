@@ -1,5 +1,6 @@
 package com.example.puppywatch
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,10 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var  selectedData: LocalDate
+    companion object {
+        var dog_idx: Int = 0
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +36,12 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         setContentView(binding.root)
 
         selectedData = LocalDate.now()
+
+        // dog_idx 가져오기
+        val sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        dog_idx = sharedPreferences.getInt("dog_idx", 0)
+        Log.d("MainActivity / dog_idx", dog_idx.toString())
+
         weekView()
         nowBehavior()
         mostBehavior()
@@ -113,7 +124,6 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun dayInMonthArray(date: LocalDate): ArrayList<String> {
 
-        var numOfBlank = 0
         var dayList = ArrayList<String>()
         var yearMonth = YearMonth.from(date)
         var firstDay = date.withDayOfMonth(1)
@@ -135,16 +145,15 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
 
         val authService = AuthService()
         authService.setNowBehaviorView(this)
-        authService.nowBehavior(1)
-        changeIcon("sit")
+        authService.nowBehavior(dog_idx)
     }
 
     private fun mostBehavior() {
         Log.d("MostBehavior()", "메소드")
 
         val authService = AuthService()
-        authService.setNowBehaviorView(this)
-        authService.mostBehavior(1)
+        authService.setMostBehaviorView(this)
+        authService.mostBehavior(dog_idx)
     }
 
     override fun onNowBehaviorSuccess(nowBehav: String) {
@@ -156,9 +165,9 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         Log.d("NowBehaviorFailure", "실패")
     }
 
-    override fun onMostBehaviorSuccess(data: ListData) {
+    override fun onMostBehaviorSuccess(data: List<ListData>) {
         Log.d("MostBehaviorSuccess", "성공")
-        makeWeekIcon(data.Date, data.mostBehav)
+        makeWeekIcon(data)
     }
     override fun onMostBehaviorFailure() {
         Log.d("MostBehaviorFailure", "실패")
@@ -194,7 +203,8 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
     }
 
     //주간 아이콘 변경
-    fun makeWeekIcon(data : String, act: String){
+    fun makeWeekIcon(data : List<ListData>){
+        Log.d("test",data.toString())
 
         //MostBehaviorList[i].Date로 접근 가능
         val cal = Calendar.getInstance()
@@ -234,10 +244,9 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         for (item in data) {
             for (i in 0..6) {
                 if (item.Date == WeekList[i]) {
-                    changeOrangeIcon(act, WeekImageViewList[i])
-                }
-                else {
-                    WeekImageViewList[i].setImageResource(0)
+                    Log.d("mostBehav: " + item.Date, item.mostBehav)
+                    changeOrangeIcon(item.mostBehav, WeekImageViewList[i])
+
                 }
 
             }

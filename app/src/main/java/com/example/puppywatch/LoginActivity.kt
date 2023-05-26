@@ -1,5 +1,6 @@
 package com.example.puppywatch
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -51,7 +52,12 @@ class LoginActivity : AppCompatActivity(), LoginView {
     }
 
     // LoginView 상속
-    override fun onLoginSuccess() {
+    override fun onLoginSuccess(dogIdx: Int) {
+        val sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("dog_idx", dogIdx)
+        editor.apply()
+
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)

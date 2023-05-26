@@ -1,12 +1,14 @@
 package com.example.puppywatch
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 
 import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.puppywatch.databinding.ActivityCalendarBinding
@@ -21,11 +23,15 @@ class CalendarActivity : ComponentActivity(),OnItemListener {
     lateinit var  selectedData: LocalDate
     private lateinit var binding: ActivityCalendarBinding
 
+    private lateinit var sharedPreferences: SharedPreferences
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCalendarBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
 
         selectedData = LocalDate.now()
 
@@ -46,7 +52,7 @@ class CalendarActivity : ComponentActivity(),OnItemListener {
         binding.monthText.text = monthYearfromDate(selectedData)
 
         val dayList = dayInMonthArray(selectedData)
-        val adapter = CalendarAdapter(dayList, this)
+        val adapter = CalendarAdapter(sharedPreferences, dayList, this)
         var manager: RecyclerView.LayoutManager = GridLayoutManager(applicationContext,7)
 
         binding.recylerView.layoutManager = manager

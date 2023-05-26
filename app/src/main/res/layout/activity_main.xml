@@ -44,7 +44,7 @@
         android:layout_height="170dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:src="@drawable/ic_test"
+        android:src="@drawable/ic_main_sit"
         app:layout_constraintBottom_toTopOf="@+id/simple_calendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -106,8 +106,8 @@
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
         android:orientation="horizontal"
-        android:paddingStart="20dp"
-        android:paddingEnd="25dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -121,12 +121,11 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:padding="4dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp">
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
 
             <TextView
                 android:id="@+id/main_day1"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="일"
@@ -144,11 +143,10 @@
 
             <ImageView
                 android:id="@+id/main_icon1"
-                android:layout_width="30dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:src="@drawable/dog" />
-
+                android:layout_marginTop="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
 
@@ -160,8 +158,8 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:padding="4dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp">
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
 
             <TextView
                 android:id="@+id/main_day2"
@@ -182,11 +180,11 @@
 
             <ImageView
                 android:id="@+id/main_icon2"
-                android:layout_width="30dp"
-                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_gravity="center"
-                android:src="@drawable/dog" />
-
+                />
 
         </LinearLayout>
 
@@ -198,8 +196,8 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:padding="4dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp">
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
 
             <TextView
                 android:id="@+id/main_day3"
@@ -220,11 +218,10 @@
 
             <ImageView
                 android:id="@+id/main_icon3"
-                android:layout_width="30dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:src="@drawable/dog" />
-
+                android:layout_marginTop="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
 
@@ -235,8 +232,8 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:padding="4dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp">
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
 
             <TextView
                 android:id="@+id/main_day4"
@@ -257,11 +254,10 @@
 
             <ImageView
                 android:id="@+id/main_icon4"
-                android:layout_width="30dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:src="@drawable/dog" />
-
+                android:layout_marginTop="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
 
@@ -272,8 +268,8 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:padding="4dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp">
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
 
             <TextView
                 android:id="@+id/main_day5"
@@ -294,11 +290,10 @@
 
             <ImageView
                 android:id="@+id/main_icon5"
-                android:layout_width="30dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:src="@drawable/dog" />
-
+                android:layout_marginTop="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
 
@@ -309,8 +304,8 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:padding="4dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp">
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
 
             <TextView
                 android:id="@+id/main_day6"
@@ -331,11 +326,10 @@
 
             <ImageView
                 android:id="@+id/main_icon6"
-                android:layout_width="30dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:src="@drawable/dog" />
-
+                android:layout_marginTop="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
 
@@ -347,8 +341,8 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:padding="4dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp">
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
 
             <TextView
                 android:id="@+id/main_day7"
@@ -369,16 +363,11 @@
 
             <ImageView
                 android:id="@+id/main_icon7"
-                android:layout_width="30dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:src="@drawable/dog" />
-
+                android:layout_marginTop="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
-
-
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
