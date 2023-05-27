@@ -81,10 +81,18 @@ class CustomDialog(
             PieEntry(staticContent.stand.toFloat(), "stand"),
             PieEntry(staticContent.run.toFloat(), "run")
         )
-        val dataSet = PieDataSet(entries, "Chart")
-        // dataSet.colors = listOf(Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW)
+
+        //값이 0인 데이터 걸러내기
+        val filteredEntries = entries.filter { it.value != 0f }
+
+        val dataSet = PieDataSet(filteredEntries, "Chart")
         for (c in ColorTemplate.PASTEL_COLORS) dataSet.colors.add(c)
+
+        // 값이 0인 데이터 표시하지 않음
+        dataSet.setDrawValues(false)
+
         val data = PieData(dataSet)
+
 
         // 차트에 데이터 설정
         chart.data = data

@@ -6,6 +6,7 @@ import com.example.puppywatch.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.http.Body
 
 class AuthService {
     private final var TAG = "AuthService"
@@ -17,6 +18,7 @@ class AuthService {
     private lateinit var mostBehaviorView: MostBehaviorView
     private lateinit var abnormalView: AbnormalView
     private lateinit var statisticView: StatisticView
+    private lateinit var mypageView: MypageView
 
     fun setJoinView(joinView: JoinView) {
         this.joinView = joinView
@@ -44,6 +46,9 @@ class AuthService {
 
     fun setStatisticView(statisticView: StatisticView){
         this.statisticView = statisticView
+    }
+    fun setMypageView(mypageView: MypageView){
+        this.mypageView = mypageView
     }
 
     fun join(user: UserSign) {
@@ -225,6 +230,29 @@ class AuthService {
         })
 
         Log.d("Statistic()/", "메소드")
+    }
+    fun mypage(dog_Idx: Int, dog: Dog) {
+        val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
+
+        authService.mypage(dog_idx,dog).enqueue(object : Callback<MypageResponse> {
+            override fun onResponse(call: Call<MypageResponse>, response: Response<MypageResponse>) {
+                if(response.body() != null) {
+                    val resp: MypageResponse = response.body()!!
+                    when (resp.code) {
+                        200 -> mypageView.onMypageSuccess()
+                        else -> mypageView.onMypageFailure()
+                    }
+                } else {
+                    mypageView.onMypageFailure()
+                }
+            }
+
+            override fun onFailure(call: Call<MypageResponse>, t: Throwable) {
+                Log.d(TAG, "Mypage/FAILURE" + t.message.toString())
+            }
+        })
+
+        Log.d("Mypage()/", "메소드")
     }
 
 }

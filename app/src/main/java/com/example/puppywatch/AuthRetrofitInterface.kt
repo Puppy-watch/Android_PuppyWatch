@@ -2,10 +2,7 @@ package com.example.puppywatch
 
 import com.example.puppywatch.response.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface AuthRetrofitInterface {
     // 회원가입
@@ -44,10 +41,17 @@ interface AuthRetrofitInterface {
         @Query("dog_idx") dog_idx: Int
     ) : Call<AbnormalResponse>
 
-    // 행동 통계계
+    // 행동 통계
    @GET("/statistic")
     fun statistic(
         @Query("date") date: String,
         @Query("dog_idx") dog_idx: Int
     ) : Call<StatisticResponse>
+
+    //마이페이지
+    @POST("/dogs/{dog_idx}")
+    fun mypage(
+            @Path("dog_idx") dog_Idx: Int,
+            @Body dog: Dog
+    ): Call<MypageResponse>
 }

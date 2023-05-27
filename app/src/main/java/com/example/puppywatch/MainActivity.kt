@@ -2,6 +2,7 @@ package com.example.puppywatch
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -71,7 +72,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         val cal = Calendar.getInstance()
         val df: DateFormat = SimpleDateFormat("dd")
         val currentDate = cal.time
-        val date = df.format(currentDate)
+        val date_week = df.format(currentDate)
 
         val nWeek: Int = cal.get(Calendar.DAY_OF_WEEK)
         val day_list = ArrayList<String>()
@@ -91,7 +92,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         }
 
         val dayList = dayInMonthArray(selectedData)
-        val dayOfToday= dayList.indexOf(date)
+        val dayOfToday= dayList.indexOf(date_week)
 
         val id_list = ArrayList<TextView>()
         id_list.add(binding.mainDate1)
@@ -237,16 +238,13 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
                 WeekList.add(date + i.getText().toString())
             }
         }
-
         //통계값에서 이번 주에 해당하는 날짜 값만
         for (item in data) {
             for (i in 0..6) {
                 if (item.Date == WeekList[i]) {
                     Log.d("mostBehav: " + item.Date, item.mostBehav)
                     changeOrangeIcon(item.mostBehav, WeekImageViewList[i])
-
                 }
-
             }
         }
     }
