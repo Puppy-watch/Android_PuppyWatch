@@ -16,6 +16,7 @@ class AuthService {
     private lateinit var nowBehaviorView: NowBehaviorView
     private lateinit var mostBehaviorView: MostBehaviorView
     private lateinit var abnormalView: AbnormalView
+    private lateinit var statisticView: StatisticView
 
     fun setJoinView(joinView: JoinView) {
         this.joinView = joinView
@@ -39,6 +40,10 @@ class AuthService {
 
     fun setAbnormalView(abnormalView: AbnormalView) {
         this.abnormalView = abnormalView
+    }
+
+    fun setStatisticView(statisticView: StatisticView){
+        this.statisticView = statisticView
     }
 
     fun join(user: UserSign) {
@@ -195,6 +200,31 @@ class AuthService {
         })
 
         Log.d("Abnormal()/", "메소드")
+    }
+
+    fun statistic(date:String,dog_idx: Int) {
+        val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
+
+        authService.statistic(date,dog_idx).enqueue(object : Callback<StatisticResponse> {
+            override fun onResponse(call: Call<StatisticResponse>, response: Response<StatisticResponse>) {
+                if(response.body() != null) {
+                    //Log.d(TAG, "Statistic/SUCCESS $response")
+                    val resp: StatisticResponse = response.body()!!
+                    when (resp.code) {
+                        200 -> statisticView.onStatisticSuccess(resp)
+                        else -> statisticView.onStatisticFailure()
+                    }
+                } else {
+                    statisticView.onStatisticFailure()
+                }
+            }
+
+            override fun onFailure(call: Call<StatisticResponse>, t: Throwable) {
+                Log.d(TAG, "Statistic/FAILURE" + t.message.toString())
+            }
+        })
+
+        Log.d("Statistic()/", "메소드")
     }
 
 }

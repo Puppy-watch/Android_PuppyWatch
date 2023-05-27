@@ -18,10 +18,11 @@ import kotlin.collections.ArrayList
 
 
 class CalendarAdapter(private val sharedPreferences: SharedPreferences, private val dayList: ArrayList<String>,
-                      private val onItemListener: OnItemListener):
+                      private val onItemListener: OnItemListener, private val yearMonth: String):
     RecyclerView.Adapter<CalendarAdapter.ItemViewHolder>(), MostBehaviorView {
 
     var holderList = ArrayList<ItemViewHolder>()
+    var click_date : String = ""
 
     companion object {
         var dog_idx: Int = 0
@@ -57,8 +58,11 @@ class CalendarAdapter(private val sharedPreferences: SharedPreferences, private 
 
             }
             else {
+                //클릭한 날짜 담아서 리스폰스 받아오기
+                click_date = yearMonth + holder.day_Text.text.toString()
+                val authService = AuthService()
                 holder.act_icon?.context?.let { context ->
-                    val dialog = CustomDialog(context)
+                    val dialog = CustomDialog(context,authService,click_date)
                     dialog.detailInitViews()
                 }
 //                val intent = Intent(holder.act_icon?.context, MainActivity::class.java)
@@ -103,26 +107,21 @@ class CalendarAdapter(private val sharedPreferences: SharedPreferences, private 
     }
 
     fun makeCalendarIcon(holders: ArrayList<ItemViewHolder>, data: List<ListData>){
-        Log.d("Calendar", "makeCalendarIcon")
-        val cal = Calendar.getInstance()
-        val df: DateFormat = SimpleDateFormat("yyyy-MM-")
-        val currentDate = cal.time
-        val date = df.format(currentDate)
 
+        //날짜와 일치하는 통계 데이터 있으면 아이콘 변경
         for(holder in holders){
             for(item in data){
                 if ((holder.day_Text.text != "")){
 
                     if ((holder.day_Text.text.toString().toInt()) < 10) {
-                        if(item.Date == date + "0" + holder.day_Text.text){
+                        if(item.Date == yearMonth + "0" + holder.day_Text.text){
                             changeOrangeIcon(item.mostBehav,holder.act_icon)
                         }
                     }
                     else {
-                        if (item.Date == date +holder.day_Text.text){
+                        if (item.Date == yearMonth +holder.day_Text.text){
                             changeOrangeIcon(item.mostBehav,holder.act_icon)
                         }
-
                     }
                 }
             }
@@ -131,14 +130,13 @@ class CalendarAdapter(private val sharedPreferences: SharedPreferences, private 
 
     fun changeOrangeIcon(act: String, iconId: ImageView) {
         when (act) {
-            "walk" -> iconId.setImageResource(R.drawable.ic_cal_walk)
+            "eat" -> iconId.setImageResource(R.drawable.ic_cal_eat)
             "run" -> iconId.setImageResource(R.drawable.ic_cal_run)
             "bite" -> iconId.setImageResource(R.drawable.ic_cal_bite)
-            "lie" -> iconId.setImageResource(R.drawable.ic_cal_lie)
+            "sleep" -> iconId.setImageResource(R.drawable.ic_cal_lie)
             "stand" -> iconId.setImageResource(R.drawable.ic_cal_stand)
-            "walk" -> iconId.setImageResource(R.drawable.ic_cal_walk)
-            "sit" -> iconId.setImageResource(R.drawable.ic_cal_sit)
-            else -> iconId.setImageResource(R.drawable.ic_cal_eat)
+            "seat" -> iconId.setImageResource(R.drawable.ic_cal_sit)
+            else -> iconId.setImageResource(R.drawable.ic_cal_walk)
         }
     }
 }

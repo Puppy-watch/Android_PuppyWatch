@@ -43,4 +43,11 @@ interface AuthRetrofitInterface {
     fun abnormals(
         @Query("dog_idx") dog_idx: Int
     ) : Call<AbnormalResponse>
+
+    // 행동 통계계
+   @GET("/statistic")
+    fun statistic(
+        @Query("date") date: String,
+        @Query("dog_idx") dog_idx: Int
+    ) : Call<StatisticResponse>
 }

@@ -1,5 +1,6 @@
 package com.example.puppywatch
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,10 +16,19 @@ class BehaviorActivity : AppCompatActivity(), AbnormalView {
 //    val itemList = arrayListOf<BehaviorListItem>()      // 아이템 배열
 //    val listAdapter = BehavoirAdapter(itemList)     // 어댑터
 
+    companion object {
+        var dog_idx: Int = 0
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBehaviorBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // dog_idx 가져오기
+        val sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        dog_idx = sharedPreferences.getInt("dog_idx", 0)
+        Log.d("BehabiorActivity / dog_idx", dog_idx.toString())
 
         binding.behaviorGoMainIv.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -61,7 +71,7 @@ class BehaviorActivity : AppCompatActivity(), AbnormalView {
 
         val authService = AuthService()
         authService.setAbnormalView(this)
-        authService.abnormal(1)
+        authService.abnormal(dog_idx)
     }
 
     override fun onAbnormalSuccess(abnormalList: AbnormalResponse) {
