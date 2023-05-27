@@ -15,7 +15,7 @@ class AuthService {
     private lateinit var checkIdView: CheckIdView
     private lateinit var nowBehaviorView: NowBehaviorView
     private lateinit var mostBehaviorView: MostBehaviorView
-
+    private lateinit var abnormalView: AbnormalView
 
     fun setJoinView(joinView: JoinView) {
         this.joinView = joinView
@@ -35,6 +35,10 @@ class AuthService {
 
     fun setMostBehaviorView(mostBehaviorView: MostBehaviorView) {
         this.mostBehaviorView = mostBehaviorView
+    }
+
+    fun setAbnormalView(abnormalView: AbnormalView) {
+        this.abnormalView = abnormalView
     }
 
     fun join(user: UserSign) {
@@ -165,6 +169,32 @@ class AuthService {
         })
 
         Log.d("MostBehavior()/", "메소드")
+    }
+
+    fun abnormal(dog_idx: Int) {
+        val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
+
+        authService.abnormals(dog_idx).enqueue(object : Callback<AbnormalResponse> {
+            override fun onResponse(call: Call<AbnormalResponse>, response: Response<AbnormalResponse>) {
+                if(response.body() != null) {
+                    Log.d(TAG, "Abnormal/SUCCESS $response")
+
+                    val resp: AbnormalResponse = response.body()!!
+                    when (resp.code) {
+                        200 -> abnormalView.onAbnormalSuccess(resp)
+                        else -> abnormalView.onAbnormalFailure()
+                    }
+                } else {
+                    abnormalView.onAbnormalFailure()
+                }
+            }
+
+            override fun onFailure(call: Call<AbnormalResponse>, t: Throwable) {
+                Log.d(TAG, "Abnormal/FAILURE" + t.message.toString())
+            }
+        })
+
+        Log.d("Abnormal()/", "메소드")
     }
 
 }

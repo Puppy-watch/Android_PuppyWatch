@@ -37,4 +37,10 @@ interface AuthRetrofitInterface {
     fun mostBehavior(
         @Query("dog_idx") dog_idx: Int
     ) : Call<MostBehaviorResponse>
+
+    // 이상 행동
+    @GET("/abnormals")
+    fun abnormals(
+        @Query("dog_idx") dog_idx: Int
+    ) : Call<AbnormalResponse>
 }
