@@ -4,15 +4,20 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.WindowManager
 import android.widget.ImageView
+import com.example.puppywatch.response.StatisticResponse
+import com.example.puppywatch.view.StatisticView
 
 class CustomDialog (
-    context: Context
-    ) { // 뷰를 띄워야하므로 Dialog 클래스는 context를 인자로 받는다.
+    context: Context, private val authService: AuthService,
+    private val click_date: String) : StatisticView { // 뷰를 띄워야하므로 Dialog 클래스는 context를 인자로 받는다.
 
         private lateinit var onClickListener: OnDialogClickListener
         private val dialog = Dialog(context)
+        lateinit var staticContent : StatisticResponse
+
 
         fun setOnClickListener(listener: OnDialogClickListener)
         {
@@ -20,6 +25,8 @@ class CustomDialog (
         }
 
         fun detailInitViews(){
+
+            statistic()
 
             // Dialog 컨텐츠 뷰 설정
             dialog.setContentView(R.layout.dialog_detail)
@@ -47,4 +54,21 @@ class CustomDialog (
         {
             fun onClicked(flag: Boolean)
         }
+    private fun statistic() {
+        Log.d("statistic()", "메소드")
+        val authService = AuthService()
+        authService.setStatisticView(this)
+        authService.statistic(click_date,1)
+    }
+
+    override fun onStatisticFailure() {
+        //Log.d("Statistic", "실패")
+    }
+
+    override fun onStatisticSuccess(data: StatisticResponse) {
+        Log.d("Statistic", data.toString())
+        staticContent = data
+
+    }
+
     }

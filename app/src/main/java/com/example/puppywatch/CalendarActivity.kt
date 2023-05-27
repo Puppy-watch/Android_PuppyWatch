@@ -44,8 +44,9 @@ class CalendarActivity : ComponentActivity(),OnItemListener {
 
         binding.monthText.text = monthYearfromDate(selectedData)
 
+        val yearMonthText = yearMonthfromDate(selectedData)
         val dayList = dayInMonthArray(selectedData)
-        val adapter = onCalendarAdapter(dayList, this)
+        val adapter = onCalendarAdapter(dayList, this,yearMonthText)
         var manager: RecyclerView.LayoutManager = GridLayoutManager(applicationContext,7)
 
         binding.recylerView.layoutManager = manager
@@ -61,7 +62,7 @@ class CalendarActivity : ComponentActivity(),OnItemListener {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun yearMonthfromDate(data: LocalDate): String{
-        var formatter = DateTimeFormatter.ofPattern("yyyy년 MM월")
+        var formatter = DateTimeFormatter.ofPattern("yyyy-MM-")
         return data.format(formatter)
     }
 

@@ -12,7 +12,6 @@ import com.example.puppywatch.databinding.ActivityMainBinding
 import com.example.puppywatch.response.ListData
 import com.example.puppywatch.view.MostBehaviorView
 import com.example.puppywatch.view.NowBehaviorView
-import com.example.puppywatch.view.onCalendarView
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -151,7 +150,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
     override fun onNowBehaviorSuccess(nowBehav: String) {
         Log.d("nowBehav 현재 행동", nowBehav)
         changeIcon(nowBehav)
-        Log.d("NowBehaviorSuccess", "성공")
+
     }
     override fun onNowBehaviorFailure() {
         Log.d("NowBehaviorFailure", "실패")
@@ -169,28 +168,27 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
     // 현재 행동 아이콘
     fun changeIcon(act:String) {
         when(act) {
-            "walk" -> binding.currentActImg.setImageResource(R.drawable.ic_main_walk)
             "run" -> binding.currentActImg.setImageResource(R.drawable.ic_main_run)
             "bite" -> binding.currentActImg.setImageResource(R.drawable.ic_main_bite)
-            "lie" -> binding.currentActImg.setImageResource(R.drawable.ic_main_lie)
+            "sleep" -> binding.currentActImg.setImageResource(R.drawable.ic_main_lie)
             "stand" -> binding.currentActImg.setImageResource(R.drawable.ic_main_stand)
             "walk" -> binding.currentActImg.setImageResource(R.drawable.ic_main_walk)
-            "sit" -> binding.currentActImg.setImageResource(R.drawable.ic_main_sit)
+            "seat" -> binding.currentActImg.setImageResource(R.drawable.ic_main_sit)
             "eat" -> binding.currentActImg.setImageResource(R.drawable.ic_main_eat)
+            else -> binding.currentActImg.setImageResource(R.drawable.ic_main_walk)
         }
     }
 
     //배경이 주황색인 아이콘으로 변경
     fun changeOrangeIcon(act: String, iconId: ImageView) {
         when (act) {
-            "walk" -> iconId.setImageResource(R.drawable.ic_cal_walk)
+            "eat" -> iconId.setImageResource(R.drawable.ic_cal_eat)
             "run" -> iconId.setImageResource(R.drawable.ic_cal_run)
             "bite" -> iconId.setImageResource(R.drawable.ic_cal_bite)
-            "lie" -> iconId.setImageResource(R.drawable.ic_cal_lie)
+            "sleep" -> iconId.setImageResource(R.drawable.ic_cal_lie)
             "stand" -> iconId.setImageResource(R.drawable.ic_cal_stand)
-            "walk" -> iconId.setImageResource(R.drawable.ic_cal_walk)
-            "sit" -> iconId.setImageResource(R.drawable.ic_cal_sit)
-            else -> iconId.setImageResource(R.drawable.ic_cal_eat)
+            "seat" -> iconId.setImageResource(R.drawable.ic_cal_sit)
+            else -> iconId.setImageResource(R.drawable.ic_cal_walk)
         }
 
     }

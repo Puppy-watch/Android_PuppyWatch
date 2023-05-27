@@ -31,4 +31,10 @@ interface AuthRetrofitInterface {
     fun mostBehavior(
         @Query("dog_idx") dog_idx: Int
     ) : Call<MostBehaviorResponse>
+
+    @GET("/statistic")
+    fun statistic(
+        @Query("date") date: String,
+        @Query("dog_idx") dog_idx: Int
+    ) : Call<StatisticResponse>
 }
