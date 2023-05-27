@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import com.example.puppywatch.databinding.ActivityMyPageBinding
 import com.example.puppywatch.response.Dog
 import com.example.puppywatch.response.User
@@ -18,6 +16,8 @@ class MyPageActivity : AppCompatActivity(), MypageView {
         super.onCreate(savedInstanceState)
         binding = ActivityMyPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        mypage()
 
         binding.myPageGoMainIv.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

@@ -234,7 +234,7 @@ class AuthService {
     fun mypage(dog_Idx: Int, dog: Dog) {
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
 
-        authService.mypage(dog_idx,dog).enqueue(object : Callback<MypageResponse> {
+        authService.mypage(dog_Idx,dog).enqueue(object : Callback<MypageResponse> {
             override fun onResponse(call: Call<MypageResponse>, response: Response<MypageResponse>) {
                 if(response.body() != null) {
                     val resp: MypageResponse = response.body()!!
