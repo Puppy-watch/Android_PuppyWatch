@@ -19,28 +19,24 @@ class MyFirebaseMessagingService :  FirebaseMessagingService() {
 
 
     override fun onMessageReceived(remoteMessage : RemoteMessage) {
-        Log.d("fire test", "firebase message received")
+        Log.d("fire test1", "firebase message received")
 
         if (remoteMessage.data.isNotEmpty()){
-            if(true){
-
-            }else{
-
-            }
+            Log.d("fire test2",remoteMessage.data.toString())
         }
         remoteMessage.notification?.let{
-            Log.d("fire test", "firebase message received")
+            Log.d("fire test3", "firebase message received")
         }
 
     }
     //토큰 처음 생성될 때 토큰 검색
     override fun onNewToken(token: String){
-        Log.d("fire test", "firebase message received")
+        Log.d("fire test4", "firebase message received")
         sendRegisterationToServer(token)
     }
 
     private fun sendRegisterationToServer(token: String?){
-        Log.d("fire test", "firebase message received")
+        Log.d("fire test5", "firebase message received")
     }
     private fun sendNotification(messageBody: String){
         val intent = Intent(this, MainActivity::class.java)
