@@ -14,21 +14,29 @@ import com.example.puppywatch.databinding.ActivityMainBinding
 import com.example.puppywatch.response.ListData
 import com.example.puppywatch.view.MostBehaviorView
 import com.example.puppywatch.view.NowBehaviorView
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUserMetadata
+import com.google.firebase.messaging.FirebaseMessaging
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.YearMonth
 import java.util.*
 import kotlin.collections.ArrayList
+import com.google.firebase.FirebaseApp
 
 class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var  selectedData: LocalDate
+    //firebase
+    val TAG : String = "hi"
+
+
     companion object {
         var dog_idx: Int = 0
     }
-
     @RequiresApi(Build.VERSION_CODES.O)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +45,22 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         setContentView(binding.root)
 
         selectedData = LocalDate.now()
+
+        //firebase
+        if (FirebaseApp.getApps(this).isEmpty()){
+            FirebaseApp.initializeApp(this)
+        }
+        //등록 토큰 가져오기
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful){
+                Log.d("Token",task.exception.toString())
+                return@OnCompleteListener
+            }
+            val token = task.result
+            Log.d("token",token)
+
+        })
+
 
         // dog_idx 가져오기
         val sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
@@ -164,12 +188,6 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
     }
     override fun onNowBehaviorFailure() {
         Log.d("NowBehaviorFailure", "실패")
-    }
-    override fun onMostBehaviorSuccess() {
-        Log.d("MostBehaviorSuccess", "성공")
-    }
-    override fun onMostBehaviorFailure() {
-        Log.d("MostBehaviorFailure", "실패")
     }
 
     override fun onMostBehaviorSuccess(data: List<ListData>) {
