@@ -229,19 +229,19 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         WeekImageViewList.add(binding.mainIcon6)
         WeekImageViewList.add(binding.mainIcon7)
 
-
         var WeekList = ArrayList<String>()
         for (i in WeekTextViewList) {
-            if (i.getText().toString().toInt() < 10) {
+            if ((i.getText().toString() != "") && (i.getText().toString().toInt() < 10)) {
                 WeekList.add(date + "0" + i.getText().toString())
             } else {
                 WeekList.add(date + i.getText().toString())
             }
         }
+        Log.d("WeekList",WeekList.toString())
         //통계값에서 이번 주에 해당하는 날짜 값만
         for (item in data) {
             for (i in 0..6) {
-                if (item.Date == WeekList[i]) {
+                if ((WeekList[i] != "") && item.Date == WeekList[i]) {
                     Log.d("mostBehav: " + item.Date, item.mostBehav)
                     changeOrangeIcon(item.mostBehav, WeekImageViewList[i])
                 }

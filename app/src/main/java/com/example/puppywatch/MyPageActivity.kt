@@ -35,7 +35,7 @@ class MyPageActivity : AppCompatActivity(), MypageView {
 
         val authService = AuthService()
         authService.setMypageView(this)
-        authService.mypage(dog_idx, Dog(dogName,dogAge,dogWeight,firstTime,secondTime,thirdTime))
+        authService.mypage(1, Dog(dogName,dogAge,dogWeight,firstTime,secondTime,thirdTime))
     }
     override fun onMypageSuccess() {
     }
