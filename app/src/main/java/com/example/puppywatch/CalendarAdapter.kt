@@ -92,7 +92,7 @@ class CalendarAdapter(private val sharedPreferences: SharedPreferences, private 
         Log.d("MostBehavior()", "메소드")
 
         val authService = AuthService()
-        //authService.setMostBehaviorView(this)
+        authService.setMostBehaviorView(this)
         Log.d("CalendarActivity / dog_idx", dog_idx.toString())
         authService.mostBehavior(dog_idx)
     }

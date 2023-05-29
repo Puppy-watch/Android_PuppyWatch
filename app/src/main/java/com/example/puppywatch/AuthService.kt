@@ -165,7 +165,7 @@ class AuthService {
 
                     val resp: MostBehaviorResponse = response.body()!!
                     when (resp.code) {
-                        200 -> {mostBehaviorView.onMostBehaviorSuccess(resp.data)}
+                        200 -> mostBehaviorView.onMostBehaviorSuccess(resp.data)
                         else -> mostBehaviorView.onMostBehaviorFailure()
                     }
                 } else {

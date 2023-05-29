@@ -79,6 +79,9 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         dog_idx = sharedPreferences.getInt("dog_idx", 0)
         Log.d("MainActivity / dog_idx", dog_idx.toString())
 
+        weekView()
+        mostBehavior()
+
         // 주기적으로 nowBehavior() 호출하는 타이머 설정
         fetchTask = object : TimerTask() {
             override fun run() {
@@ -87,9 +90,6 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         }
         timer = Timer()
         timer.schedule(fetchTask, 0, 5000) // 0초 후부터 5초마다 실행
-
-        weekView()
-        mostBehavior()
 
         binding.mainGoMyPageIv.setOnClickListener {
             val intent = Intent(this, MyPageActivity::class.java)
