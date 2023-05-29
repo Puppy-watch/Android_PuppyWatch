@@ -203,6 +203,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
 
     override fun onNowBehaviorSuccess(nowBehav: String) {
         Log.d("nowBehav 현재 행동", nowBehav)
+        binding.mainPuppyBehaviorTv.setText("현재 " + nowBehav + " 행동 중")
         changeIcon(nowBehav)
         Log.d("NowBehaviorSuccess", "성공")
     }
