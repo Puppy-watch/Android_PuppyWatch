@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.puppywatch.databinding.ActivityMainBinding
 import com.example.puppywatch.response.ListData
@@ -58,6 +59,9 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
             }
             val token = task.result
             Log.d("token",token)
+
+            val msg = getString(R.string.msg_token_fmt,token)
+            Toast.makeText(baseContext,msg,Toast.LENGTH_SHORT).show()
 
         })
 
