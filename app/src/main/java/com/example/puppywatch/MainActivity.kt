@@ -31,9 +31,12 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var  selectedData: LocalDate
+
+    private lateinit var timer: Timer
+    private lateinit var fetchTask: TimerTask
+
     //firebase
     val TAG : String = "hi"
-
 
     companion object {
         var dog_idx: Int = 0
@@ -44,6 +47,11 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Firebase 초기화
+        if (FirebaseApp.getApps(this).isEmpty()) {
+            FirebaseApp.initializeApp(this)
+        }
 
         selectedData = LocalDate.now()
 
@@ -61,7 +69,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
             Log.d("token",token)
 
             val msg = getString(R.string.msg_token_fmt,token)
-            Toast.makeText(baseContext,msg,Toast.LENGTH_SHORT).show()
+//            Toast.makeText(baseContext,msg,Toast.LENGTH_SHORT).show()
 
         })
 
@@ -71,8 +79,16 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         dog_idx = sharedPreferences.getInt("dog_idx", 0)
         Log.d("MainActivity / dog_idx", dog_idx.toString())
 
+        // 주기적으로 nowBehavior() 호출하는 타이머 설정
+        fetchTask = object : TimerTask() {
+            override fun run() {
+                nowBehavior()
+            }
+        }
+        timer = Timer()
+        timer.schedule(fetchTask, 0, 5000) // 0초 후부터 5초마다 실행
+
         weekView()
-        nowBehavior()
         mostBehavior()
 
         binding.mainGoMyPageIv.setOnClickListener {
