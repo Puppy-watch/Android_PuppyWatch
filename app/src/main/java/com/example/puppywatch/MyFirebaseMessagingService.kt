@@ -26,23 +26,9 @@ class MyFirebaseMessagingService :  FirebaseMessagingService() {
         Log.d("fire test1", "firebase message received")
         schduleJob()
 
+        /*
         if (remoteMessage.data.isNotEmpty()){
             Log.d("fire test2",remoteMessage.data.toString())
-        }
-        /*
-        remoteMessage.notification?.let{
-            Log.d("fire test3", remoteMessage.)
-        }
-
-        remoteMessage.data.isNotEmpty().let { hasData ->
-            if (hasData) {
-                // 메시지 데이터 읽기
-                val data = remoteMessage.data
-                val messageBody = data["body"] // 메시지 내용
-                val messageTitle = data["title"] // 메시지 제목
-
-                // 메시지 내용과 제목을 사용하여 처리하는 작업 수행
-            }
         }*/
 
         // 알림 확인
@@ -51,7 +37,7 @@ class MyFirebaseMessagingService :  FirebaseMessagingService() {
             val body = notification.body // 알림 내용
             // 알림 내용을 사용하여 알림을 표시하거나 처리하는 등의 작업 수행
             Log.d("fire test_title",body.toString())
-            //여기서 알림창 띄워야 할 듯.
+            sendNotification(remoteMessage.notification?.title, remoteMessage.notification!!.body!!)
         }
 
 
@@ -70,6 +56,36 @@ class MyFirebaseMessagingService :  FirebaseMessagingService() {
     private fun sendRegisterationToServer(token: String?){
         Log.d("fire test5", "firebase message received")
     }
+    private fun sendNotification(title: String?, body: String)
+    {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+
+        val channelId = getString(R.string.default_notification_channel_id)
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setAutoCancel(true)
+            .setSound(defaultSoundUri)
+            .setContentIntent(pendingIntent)
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        // 오레오 버전 예외처리
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(channelId,
+                "Channel human readable title",
+                NotificationManager.IMPORTANCE_DEFAULT)
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build())
+    }
+
+
+    /*
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun sendNotification(messageBody: String) {
@@ -81,7 +97,7 @@ class MyFirebaseMessagingService :  FirebaseMessagingService() {
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setContentTitle(getString(R.string.notification_title))
+            .setContentTitle(messageBody.)
             .setContentText(messageBody)
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
@@ -101,7 +117,7 @@ class MyFirebaseMessagingService :  FirebaseMessagingService() {
 
         notificationManager.notify(0, notificationBuilder.build())
     }
-
+*/
     companion object {
         private const val TAG = "MyfirebaseService"
     }
