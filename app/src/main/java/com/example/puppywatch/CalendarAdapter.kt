@@ -83,6 +83,8 @@ class CalendarAdapter(private val sharedPreferences: SharedPreferences, private 
         holder.itemView.setOnClickListener {
             onItemListener.onItemClick(day)
         }
+        Log.d("&&item Count", itemCount.toString())
+        Log.d("&&position", position.toString())
         if (position == itemCount - 1) {
             makeCalendarIcon(holderList, mostBehavList)
             Log.d("###MOSTBEHAVLIST###", mostBehavList.toString())
