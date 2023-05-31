@@ -69,7 +69,7 @@ class CustomDialog(
         authService.statistic(click_date, dog_idx)
     }
     private fun formatValueWithHours(value: Float): String {
-        return "$value 분"
+        return "${value.toInt()} 분"
     }
 
     override fun onStatisticSuccess(data: StatisticResponse) {
@@ -96,6 +96,10 @@ class CustomDialog(
 
         dataSet.setDrawValues(true)
 
+        //value 색과 크기 변경
+        dataSet.setValueTextColor(Color.WHITE)
+        dataSet.setValueTextSize(15f)
+
         val data = PieData(dataSet)
 
         // 차트에 데이터 설정
@@ -107,7 +111,6 @@ class CustomDialog(
             }
         }
         dataSet.valueFormatter = valueFormatter
-
         chart.invalidate()
 
 
