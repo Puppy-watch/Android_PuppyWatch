@@ -26,6 +26,7 @@ import java.time.YearMonth
 import java.util.*
 import kotlin.collections.ArrayList
 import com.google.firebase.FirebaseApp
+import java.io.Serializable
 
 class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
 
@@ -35,11 +36,14 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
     private lateinit var timer: Timer
     private lateinit var fetchTask: TimerTask
 
+    //val mostBehavList : MutableList<ListData> = mutableListOf()
+
     //firebase
     val TAG : String = "hi"
 
     companion object {
         var dog_idx: Int = 0
+        val mostBehavList : MutableList<ListData> = mutableListOf()
     }
     @RequiresApi(Build.VERSION_CODES.O)
 
@@ -214,6 +218,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
     override fun onMostBehaviorSuccess(data: List<ListData>) {
         Log.d("MostBehaviorSuccess", "성공")
         makeWeekIcon(data)
+        mostBehavList.addAll(data)
     }
     override fun onMostBehaviorFailure() {
         Log.d("MostBehaviorFailure", "실패")

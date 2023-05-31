@@ -69,7 +69,7 @@ class CustomDialog(
         authService.statistic(click_date, dog_idx)
     }
     private fun formatValueWithHours(value: Float): String {
-        return "$value 시간"
+        return "${value.toInt()} 분"
     }
 
     override fun onStatisticSuccess(data: StatisticResponse) {
@@ -94,8 +94,16 @@ class CustomDialog(
         val dataSet = PieDataSet(filteredEntries, "Chart")
         for (c in ColorTemplate.PASTEL_COLORS) dataSet.colors.add(c)
 
-        // 값이 0인 데이터 표시하지 않음
-        dataSet.setDrawValues(false)
+        dataSet.setDrawValues(true)
+
+        //value 색과 크기 변경
+        dataSet.setValueTextColor(Color.WHITE)
+        dataSet.setValueTextSize(15f)
+
+        val data = PieData(dataSet)
+
+        // 차트에 데이터 설정
+        chart.data = data
 
         val valueFormatter = object : ValueFormatter() {
             override fun getFormattedValue(value: Float): String {
@@ -103,11 +111,6 @@ class CustomDialog(
             }
         }
         dataSet.valueFormatter = valueFormatter
-
-        val data = PieData(dataSet)
-
-        // 차트에 데이터 설정
-        chart.data = data
         chart.invalidate()
 
 
@@ -121,10 +124,5 @@ class CustomDialog(
 
     interface OnDialogClickListener {
         fun onClicked(flag: Boolean)
-    }
-}
-class HoursValueFormatter : ValueFormatter() {
-    override fun getFormattedValue(value: Float): String {
-        return "$value hours"
     }
 }

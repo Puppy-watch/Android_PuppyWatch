@@ -19,3 +19,13 @@ data class User(
 data class UserIdCheck(
     @SerializedName("userId") val userId: String
 )
+
+// 회원 정보 수정
+data class Dog(
+    @SerializedName("dogName") val dogName: String,
+    @SerializedName("dogAge") val dogAge: Int,
+    @SerializedName("dogWeight")val dogWeight: Double,
+    @SerializedName("firstTime") val firstTime: String,
+    @SerializedName("secondTime") val secondTime: String,
+    @SerializedName("thirdTime") val thirdTime: String
+)

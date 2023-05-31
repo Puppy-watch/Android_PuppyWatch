@@ -39,7 +39,7 @@
             android:textSize="18sp" />
 
         <ImageView
-            android:id="@+id/my_page_edit"
+            android:id="@+id/my_page_edit_iv"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
@@ -94,7 +94,6 @@
                     android:layout_marginTop="135dp"
                     android:layout_marginEnd="106dp"
                     android:src="@drawable/ic_camera"
-                    android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="@+id/my_page_puppy_iv"
                     app:layout_constraintStart_toStartOf="@+id/my_page_puppy_iv"
                     app:layout_constraintTop_toTopOf="@+id/my_page_puppy_iv" />
@@ -287,18 +286,35 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/my_page_puppy_eat_tv"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/my_page_puppy_eat_ll"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="35dp"
-                android:layout_marginTop="18dp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="밥 먹는 시간"
-                android:textColor="@color/light_black"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/my_page_puppy_age_input_ll" />
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:paddingStart="35dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/my_page_puppy_eat_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="밥 먹는 시간"
+                    android:textColor="@color/light_black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="24시간 (00:00 형태로 입력)"
+                    android:textColor="@color/red"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/my_page_puppy_breakfast_cv"
@@ -313,7 +329,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/my_page_puppy_eat_tv">
+                app:layout_constraintTop_toBottomOf="@+id/my_page_puppy_eat_ll">
 
                 <LinearLayout
                     android:id="@+id/my_page_puppy_breakfast_ll"
@@ -421,7 +437,7 @@
             </androidx.cardview.widget.CardView>
 
             <android.widget.Button
-                android:id="@+id/login_submit_btn"
+                android:id="@+id/my_page_edit_button"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="30dp"
