@@ -9,7 +9,7 @@ import com.example.puppywatch.response.Dog
 import com.example.puppywatch.response.User
 import com.example.puppywatch.view.MypageView
 
-class MyPageActivity : AppCompatActivity(), MypageView {
+class MyPageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMyPageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +17,7 @@ class MyPageActivity : AppCompatActivity(), MypageView {
         binding = ActivityMyPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mypage()
+//        mypage()
 
         binding.myPageGoMainIv.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -25,21 +25,21 @@ class MyPageActivity : AppCompatActivity(), MypageView {
             startActivity(intent)
         }
     }
-    private fun mypage() {
-        val dogName = binding.myPagePuppyNameEt.text.toString()
-        val dogAge = binding.myPagePuppyAgeEt.text.toString().toInt()
-        val dogWeight = binding.myPagePuppyWeightEt.text.toString().toDouble()
-        val firstTime = binding.myPagePuppyBreakfastEt.text.toString()
-        val secondTime = binding.myPagePuppyLunchEt.text.toString()
-        val thirdTime = binding.myPagePuppyDinnerEt.text.toString()
-
-        val authService = AuthService()
-        authService.setMypageView(this)
-        authService.mypage(1, Dog(dogName,dogAge,dogWeight,firstTime,secondTime,thirdTime))
-    }
-    override fun onMypageSuccess() {
-    }
-
-    override fun onMypageFailure() {
-    }
+//    private fun mypage() {
+//        val dogName = binding.myPagePuppyNameEt.text.toString()
+//        val dogAge = binding.myPagePuppyAgeEt.text.toString().toInt()
+//        val dogWeight = binding.myPagePuppyWeightEt.text.toString().toDouble()
+//        val firstTime = binding.myPagePuppyBreakfastEt.text.toString()
+//        val secondTime = binding.myPagePuppyLunchEt.text.toString()
+//        val thirdTime = binding.myPagePuppyDinnerEt.text.toString()
+//
+//        val authService = AuthService()
+//        authService.setMypageView(this)
+//        authService.mypage(1, Dog(dogName,dogAge,dogWeight,firstTime,secondTime,thirdTime))
+//    }
+//    override fun onMypageSuccess() {
+//    }
+//
+//    override fun onMypageFailure() {
+//    }
 }

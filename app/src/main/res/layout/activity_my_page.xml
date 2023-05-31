@@ -47,31 +47,6 @@
 
     </LinearLayout>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/my_page_puppy_iv"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/test_dog_image"
-        app:civ_border_overlay="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_page_title_ll" />
-
-    <ImageView
-        android:id="@+id/my_page_edit_camera_iv"
-        android:layout_width="49dp"
-        android:layout_height="49dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="145dp"
-        android:src="@drawable/ic_camera"
-        app:layout_constraintEnd_toEndOf="@+id/my_page_puppy_iv"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="@+id/my_page_puppy_iv"
-        app:layout_constraintTop_toTopOf="@+id/my_page_puppy_iv" />
-
     <ScrollView
         android:id="@+id/join_sv"
         android:layout_width="match_parent"
@@ -80,12 +55,51 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_page_puppy_iv">
+        app:layout_constraintTop_toBottomOf="@+id/my_page_title_ll">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/my_page_puppy_iv"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="36dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/test_dog_image"
+                    app:civ_border_overlay="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent" />
+
+                <ImageView
+                    android:id="@+id/my_page_edit_camera_iv"
+                    android:layout_width="49dp"
+                    android:layout_height="49dp"
+                    android:layout_alignTop="@+id/my_page_puppy_iv"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="255dp"
+                    android:layout_marginTop="135dp"
+                    android:layout_marginEnd="106dp"
+                    android:src="@drawable/ic_camera"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="@+id/my_page_puppy_iv"
+                    app:layout_constraintStart_toStartOf="@+id/my_page_puppy_iv"
+                    app:layout_constraintTop_toTopOf="@+id/my_page_puppy_iv" />
+
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/my_page_puppy_name_tv"
@@ -405,6 +419,22 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
+            <android.widget.Button
+                android:id="@+id/login_submit_btn"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginEnd="70dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/sign_btn_background"
+                android:fontFamily="@font/roboto_light"
+                android:text="수정하기"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:visibility="invisible"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

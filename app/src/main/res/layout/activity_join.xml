@@ -109,7 +109,7 @@
                 android:id="@+id/join_password_text_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 android:paddingStart="35dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -181,7 +181,7 @@
                 android:id="@+id/join_password_check_text_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 android:paddingStart="35dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -251,10 +251,10 @@
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
-                android:id="@+id/join_puppy_name_text_ll"
+                android:id="@+id/join_user_name_text_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 android:paddingStart="35dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -262,72 +262,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/join_password_check_cv">
 
                 <TextView
-                    android:id="@+id/join_puppy_name_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="반려견 이름"
-                    android:textColor="@color/light_black"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/join_puppy_name_cv"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="30dp"
-                app:cardBackgroundColor="@color/light_gray"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/join_puppy_name_text_ll">
-
-                <LinearLayout
-                    android:id="@+id/join_puppy_name_ll"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="25dp">
-
-                    <EditText
-                        android:id="@+id/join_puppy_name_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@android:color/transparent"
-                        android:fontFamily="@font/roboto_regular"
-                        android:hint="반려견 이름을 입력해주세요"
-                        android:textColorHint="@color/gray"
-                        android:textSize="15sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:id="@+id/join_user_name_text_ll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:paddingStart="35dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/join_puppy_name_cv">
-
-                <TextView
                     android:id="@+id/join_user_name_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
-                    android:text="견주 이름"
+                    android:text="사용자 이름"
                     android:textColor="@color/light_black"
                     android:textSize="15sp" />
 
@@ -363,7 +302,7 @@
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/roboto_regular"
-                        android:hint="견주 이름을 입력해주세요"
+                        android:hint="사용자 이름을 입력해주세요"
                         android:textColorHint="@color/gray"
                         android:textSize="15sp"
                         tools:ignore="TouchTargetSizeCheck" />
