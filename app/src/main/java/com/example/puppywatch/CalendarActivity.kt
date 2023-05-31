@@ -12,6 +12,8 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.puppywatch.databinding.ActivityCalendarBinding
+import com.example.puppywatch.response.ListData
+import com.example.puppywatch.view.MostBehaviorView
 
 import java.time.LocalDate
 import java.time.YearMonth
@@ -22,8 +24,12 @@ class CalendarActivity : ComponentActivity(),OnItemListener {
 
     lateinit var  selectedData: LocalDate
     private lateinit var binding: ActivityCalendarBinding
-
     private lateinit var sharedPreferences: SharedPreferences
+    val mostBehavList : MutableList<ListData> = mutableListOf()
+
+    companion object {
+        var dog_idx: Int = 0
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,14 +41,20 @@ class CalendarActivity : ComponentActivity(),OnItemListener {
 
         selectedData = LocalDate.now()
 
+        //인텐트로 넘어온 리스트 받기
+        //val listData = intent.getSerializableExtra("mostBehavList") as List<ListData>
+        //mostBehavList.addAll(listData)
+
         setMonthView()
 
         binding.preBtn.setOnClickListener {
             selectedData = selectedData.minusMonths(1)
+
             setMonthView()
         }
         binding.nextBtn.setOnClickListener {
             selectedData = selectedData.plusMonths(1)
+
             setMonthView()
         }
     }
@@ -53,13 +65,34 @@ class CalendarActivity : ComponentActivity(),OnItemListener {
 
         val yearMonthText = yearMonthfromDate(selectedData)
         val dayList = dayInMonthArray(selectedData)
-        val adapter = CalendarAdapter(sharedPreferences, dayList, this, yearMonthText)
+        val adapter = CalendarAdapter(sharedPreferences, dayList, this, yearMonthText, mostBehavList)
         var manager: RecyclerView.LayoutManager = GridLayoutManager(applicationContext,7)
 
         binding.recylerView.layoutManager = manager
         binding.recylerView.adapter = adapter
 
+
     }
+    /*
+    private fun mostBehavior() {
+        Log.d("MostBehavior()", "메소드")
+
+        val authService = AuthService()
+        authService.setMostBehaviorView(this)
+        Log.d("CalendarActivity / dog_idx", dog_idx.toString())
+        authService.mostBehavior(dog_idx)
+    }
+
+    override fun onMostBehaviorSuccess(data: List<ListData>) {
+        mostBehavList.addAll(data)
+        Log.d("리스트 데이터", data.toString())
+    }
+
+    override fun onMostBehaviorFailure() {
+        Log.d("Calendar", "실패")
+    }
+    */
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun monthYearfromDate(data: LocalDate): String{

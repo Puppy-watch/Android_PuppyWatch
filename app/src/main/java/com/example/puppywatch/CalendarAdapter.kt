@@ -18,15 +18,16 @@ import kotlin.collections.ArrayList
 
 
 class CalendarAdapter(private val sharedPreferences: SharedPreferences, private val dayList: ArrayList<String>,
-                      private val onItemListener: OnItemListener, private val yearMonth: String):
-    RecyclerView.Adapter<CalendarAdapter.ItemViewHolder>(), MostBehaviorView {
+                      private val onItemListener: OnItemListener, private val yearMonth: String, private val mostBehavList : List<ListData>):
+    RecyclerView.Adapter<CalendarAdapter.ItemViewHolder>() {
 
     var holderList = ArrayList<ItemViewHolder>()
     var click_date : String = ""
 
+    /*
     companion object {
         var dog_idx: Int = 0
-    }
+    }*/
 
     class ItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val day_Text: TextView = itemView.findViewById(R.id.day_Text)
@@ -41,10 +42,10 @@ class CalendarAdapter(private val sharedPreferences: SharedPreferences, private 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int){
 
         // dog_idx 가져오기
-        dog_idx = sharedPreferences.getInt("dog_idx", 0)
-        Log.d("CalendarActivity / dog_idx", dog_idx.toString())
+        //dog_idx = sharedPreferences.getInt("dog_idx", 0)
+        //Log.d("CalendarActivity / dog_idx", dog_idx.toString())
 
-        mostBehavior()
+        //makeCalendarIcon(holderList,mostBehavList)
 
         var day = dayList[holder.adapterPosition]
         holder.day_Text.setText(day)
@@ -55,7 +56,6 @@ class CalendarAdapter(private val sharedPreferences: SharedPreferences, private 
         holder.act_icon.setOnClickListener{
             if (day.equals("")){
                 Log.d("buttonTest", "item position: ${holder.adapterPosition}")
-
             }
             else {
                 //클릭한 날짜 담아서 리스폰스 받아오기
@@ -71,7 +71,7 @@ class CalendarAdapter(private val sharedPreferences: SharedPreferences, private 
             }
         }
 
-        Log.d("Calendar", holderList.toString())
+        //Log.d("Calendar", holderList.toString())
 
         holder.act_icon.setImageResource(0)
 
@@ -83,11 +83,17 @@ class CalendarAdapter(private val sharedPreferences: SharedPreferences, private 
         holder.itemView.setOnClickListener {
             onItemListener.onItemClick(day)
         }
+        if (position == itemCount - 1) {
+            makeCalendarIcon(holderList, mostBehavList)
+            Log.d("###MOSTBEHAVLIST###", mostBehavList.toString())
+
+        }
 
     }
     override fun getItemCount(): Int {
         return dayList.size
     }
+    /*
     private fun mostBehavior() {
         Log.d("MostBehavior()", "메소드")
 
@@ -105,6 +111,8 @@ class CalendarAdapter(private val sharedPreferences: SharedPreferences, private 
     override fun onMostBehaviorFailure() {
         Log.d("Calendar", "실패")
     }
+
+     */
 
     fun makeCalendarIcon(holders: ArrayList<ItemViewHolder>, data: List<ListData>){
 
