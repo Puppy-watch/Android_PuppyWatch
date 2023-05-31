@@ -15,8 +15,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-
-
 class CalendarAdapter(private val sharedPreferences: SharedPreferences, private val dayList: ArrayList<String>,
                       private val onItemListener: OnItemListener, private val yearMonth: String):
     RecyclerView.Adapter<CalendarAdapter.ItemViewHolder>(), MostBehaviorView {

@@ -9,26 +9,38 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.puppywatch.databinding.ActivityMainBinding
 import com.example.puppywatch.response.ListData
 import com.example.puppywatch.view.MostBehaviorView
 import com.example.puppywatch.view.NowBehaviorView
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUserMetadata
+import com.google.firebase.messaging.FirebaseMessaging
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.YearMonth
 import java.util.*
 import kotlin.collections.ArrayList
+import com.google.firebase.FirebaseApp
 
 class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var  selectedData: LocalDate
+
+    private lateinit var timer: Timer
+    private lateinit var fetchTask: TimerTask
+
+    //firebase
+    val TAG : String = "hi"
+
     companion object {
         var dog_idx: Int = 0
     }
-
     @RequiresApi(Build.VERSION_CODES.O)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +48,31 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Firebase 초기화
+        if (FirebaseApp.getApps(this).isEmpty()) {
+            FirebaseApp.initializeApp(this)
+        }
+
         selectedData = LocalDate.now()
+
+        //firebase
+        if (FirebaseApp.getApps(this).isEmpty()){
+            FirebaseApp.initializeApp(this)
+        }
+        //등록 토큰 가져오기
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful){
+                Log.d("Token",task.exception.toString())
+                return@OnCompleteListener
+            }
+            val token = task.result
+            Log.d("token",token)
+
+            val msg = getString(R.string.msg_token_fmt,token)
+//            Toast.makeText(baseContext,msg,Toast.LENGTH_SHORT).show()
+
+        })
+
 
         // dog_idx 가져오기
         val sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
@@ -44,8 +80,16 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         Log.d("MainActivity / dog_idx", dog_idx.toString())
 
         weekView()
-        nowBehavior()
         mostBehavior()
+
+        // 주기적으로 nowBehavior() 호출하는 타이머 설정
+        fetchTask = object : TimerTask() {
+            override fun run() {
+                nowBehavior()
+            }
+        }
+        timer = Timer()
+        timer.schedule(fetchTask, 0, 5000) // 0초 후부터 5초마다 실행
 
         binding.mainGoMyPageIv.setOnClickListener {
             val intent = Intent(this, MyPageActivity::class.java)
@@ -159,6 +203,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
 
     override fun onNowBehaviorSuccess(nowBehav: String) {
         Log.d("nowBehav 현재 행동", nowBehav)
+        binding.mainPuppyBehaviorTv.setText("현재 " + nowBehav + " 행동 중")
         changeIcon(nowBehav)
         Log.d("NowBehaviorSuccess", "성공")
     }
@@ -229,19 +274,19 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         WeekImageViewList.add(binding.mainIcon6)
         WeekImageViewList.add(binding.mainIcon7)
 
-
         var WeekList = ArrayList<String>()
         for (i in WeekTextViewList) {
-            if (i.getText().toString().toInt() < 10) {
+            if ((i.getText().toString() != "") && (i.getText().toString().toInt() < 10)) {
                 WeekList.add(date + "0" + i.getText().toString())
             } else {
                 WeekList.add(date + i.getText().toString())
             }
         }
+        Log.d("WeekList",WeekList.toString())
         //통계값에서 이번 주에 해당하는 날짜 값만
         for (item in data) {
             for (i in 0..6) {
-                if (item.Date == WeekList[i]) {
+                if ((WeekList[i] != "") && item.Date == WeekList[i]) {
                     Log.d("mostBehav: " + item.Date, item.mostBehav)
                     changeOrangeIcon(item.mostBehav, WeekImageViewList[i])
                 }

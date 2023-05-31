@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PuppyWatch</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="notification_title">Notification Title</string>
+    <string name="msg_token_fmt">Token: %s</string>
+
+
 </resources>

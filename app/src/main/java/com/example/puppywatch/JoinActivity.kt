@@ -61,9 +61,8 @@ class JoinActivity : AppCompatActivity(), JoinView, CheckIdView {
         val userId: String = binding.joinIdEt.text.toString()
         val userPw: String = binding.joinPasswordEt.text.toString()
         val userName: String = binding.joinUserNameEt.text.toString()
-        val dogName: String = binding.joinPuppyNameEt.text.toString()
 
-        return UserSign(userId, userPw, userName, dogName)
+        return UserSign(userId, userPw, userName)
     }
 
     private fun getUserIdCheck(): UserIdCheck {
@@ -96,12 +95,7 @@ class JoinActivity : AppCompatActivity(), JoinView, CheckIdView {
         }
 
         if(binding.joinUserNameEt.text.toString().isEmpty()) {
-            Toast.makeText(this, "견주 이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if(binding.joinPuppyNameEt.text.toString().isEmpty()) {
-            Toast.makeText(this, "반려견 이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "사용자 이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -114,7 +108,6 @@ class JoinActivity : AppCompatActivity(), JoinView, CheckIdView {
         binding.joinIdEt.setText("")
         binding.joinPasswordEt.setText("")
         binding.joinUserNameEt.setText("")
-        binding.joinPuppyNameEt.setText("")
         binding.joinPasswordCheckFailTv.visibility = View.INVISIBLE
         binding.joinIdFailTv.visibility = View.INVISIBLE
     }

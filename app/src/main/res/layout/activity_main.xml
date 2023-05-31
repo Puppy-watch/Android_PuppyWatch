@@ -54,8 +54,8 @@
 
     <ImageView
         android:id="@+id/main_go_behavior_iv"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:layout_gravity="center"
         android:layout_marginTop="130dp"
         android:src="@drawable/ic_behavior"
@@ -63,6 +63,19 @@
         app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintStart_toStartOf="@+id/current_act_img"
         app:layout_constraintTop_toTopOf="@+id/current_act_img" />
+
+    <TextView
+        android:id="@+id/main_puppy_behavior_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:font="@font/roboto_bold"
+        android:text="PUPPY BEHAVIOR"
+        android:textColor="@color/main_blue"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/current_act_img" />
 
     <LinearLayout
         android:id="@+id/simple_calendar"
