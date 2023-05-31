@@ -15,6 +15,9 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.github.mikephil.charting.formatter.ValueFormatter
+
+
 
 class CustomDialog(
     private val context: Context,
@@ -65,6 +68,9 @@ class CustomDialog(
         authService.setStatisticView(this)
         authService.statistic(click_date, dog_idx)
     }
+    private fun formatValueWithHours(value: Float): String {
+        return "$value 시간"
+    }
 
     override fun onStatisticSuccess(data: StatisticResponse) {
         Log.d("Statistic", data.toString())
@@ -91,12 +97,19 @@ class CustomDialog(
         // 값이 0인 데이터 표시하지 않음
         dataSet.setDrawValues(false)
 
-        val data = PieData(dataSet)
+        val valueFormatter = object : ValueFormatter() {
+            override fun getFormattedValue(value: Float): String {
+                return formatValueWithHours(value)
+            }
+        }
+        dataSet.valueFormatter = valueFormatter
 
+        val data = PieData(dataSet)
 
         // 차트에 데이터 설정
         chart.data = data
         chart.invalidate()
+
 
         // Dialog 표시
         dialog.show()
@@ -108,5 +121,10 @@ class CustomDialog(
 
     interface OnDialogClickListener {
         fun onClicked(flag: Boolean)
+    }
+}
+class HoursValueFormatter : ValueFormatter() {
+    override fun getFormattedValue(value: Float): String {
+        return "$value hours"
     }
 }
