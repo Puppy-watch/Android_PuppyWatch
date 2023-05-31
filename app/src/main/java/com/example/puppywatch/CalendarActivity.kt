@@ -25,7 +25,7 @@ class CalendarActivity : ComponentActivity(),OnItemListener {
     lateinit var  selectedData: LocalDate
     private lateinit var binding: ActivityCalendarBinding
     private lateinit var sharedPreferences: SharedPreferences
-    val mostBehavList : MutableList<ListData> = mutableListOf()
+    //val mostBehavList : MutableList<ListData> = mutableListOf()
 
     companion object {
         var dog_idx: Int = 0
@@ -62,12 +62,13 @@ class CalendarActivity : ComponentActivity(),OnItemListener {
     private fun setMonthView(){
 
         binding.monthText.text = monthYearfromDate(selectedData)
-
+        val mostBehaviorList = MainActivity.mostBehavList
         val yearMonthText = yearMonthfromDate(selectedData)
         val dayList = dayInMonthArray(selectedData)
-        val adapter = CalendarAdapter(sharedPreferences, dayList, this, yearMonthText, mostBehavList)
-        var manager: RecyclerView.LayoutManager = GridLayoutManager(applicationContext,7)
+        val adapter = CalendarAdapter(sharedPreferences, dayList, this, yearMonthText, mostBehaviorList)
 
+        var manager: RecyclerView.LayoutManager = GridLayoutManager(applicationContext,7)
+        Log.d("mostBehaviorList In Calendar",mostBehaviorList.toString())
         binding.recylerView.layoutManager = manager
         binding.recylerView.adapter = adapter
 

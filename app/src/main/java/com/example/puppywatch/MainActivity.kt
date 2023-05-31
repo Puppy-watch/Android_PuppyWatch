@@ -36,13 +36,14 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
     private lateinit var timer: Timer
     private lateinit var fetchTask: TimerTask
 
-    val mostBehavList : MutableList<ListData> = mutableListOf()
+    //val mostBehavList : MutableList<ListData> = mutableListOf()
 
     //firebase
     val TAG : String = "hi"
 
     companion object {
         var dog_idx: Int = 0
+        val mostBehavList : MutableList<ListData> = mutableListOf()
     }
     @RequiresApi(Build.VERSION_CODES.O)
 
@@ -108,7 +109,6 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
 
         binding.goCalendarBtn.setOnClickListener{
             val intent = Intent(this, CalendarActivity::class.java)
-            //intent.putExtra("mostBehavList", mostBehavList)
             startActivity(intent)
         }
     }
@@ -219,7 +219,6 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         Log.d("MostBehaviorSuccess", "성공")
         makeWeekIcon(data)
         mostBehavList.addAll(data)
-        Log.d("###mostBehavList###",mostBehavList.toString())
     }
     override fun onMostBehaviorFailure() {
         Log.d("MostBehaviorFailure", "실패")
