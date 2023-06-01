@@ -77,7 +77,6 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
 
         })
 
-
         // dog_idx 가져오기
         val sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
         dog_idx = sharedPreferences.getInt("dog_idx", 0)
@@ -138,7 +137,6 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         }
         binding.weekday.text = month_of_year.toString() + "월 "+week_of_month.toString()+"번째 주"
 
-
         //위클리 텍스트뷰 리스트에 넣기
         val weekText_list = ArrayList<TextView>()
         weekText_list.add(binding.mainDate1)
@@ -166,6 +164,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         Log.d("fifth",fifth_week.toString())
         //Log.d("sixth",sixth_week.toString())
 
+        //몇째주인지 체크해서 그 주의 위클리 캘린더 보냄
         when (week_of_month){
             1 -> {
                 for (i in 0..6){
@@ -207,6 +206,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         var yearMonth = YearMonth.from(date)
         var firstDay = date.withDayOfMonth(1)
         var lastDay = yearMonth.lengthOfMonth()
+        //1일의 요일값
         var dayOfWeek = firstDay.dayOfWeek.value
 
         for (i in 1..41) {
