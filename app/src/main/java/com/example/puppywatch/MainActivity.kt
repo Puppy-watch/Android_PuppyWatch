@@ -118,17 +118,11 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
     fun weekView(){
 
         val cal = Calendar.getInstance()
-        val df: DateFormat = SimpleDateFormat("dd")
 
         //n월 n번째주
         var month_of_year = cal.get(Calendar.MONTH)+1
         val week_of_month = cal.get(Calendar.WEEK_OF_MONTH)
 
-        val currentDate = cal.time
-        //오늘 날짜를 dd 형식으로 가져오기
-        val today = df.format(currentDate)
-        //오늘이 무슨 요일인지, 일요일=1, 화요일=2,...
-        val nWeek: Int = cal.get(Calendar.DAY_OF_WEEK)
         //날짜 담을 리스트
         var day_list = ArrayList<String>()
         var first_week = ArrayList<String>()
