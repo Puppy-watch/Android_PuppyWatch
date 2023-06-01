@@ -139,34 +139,23 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
             day_list.add(formattedDate)
         }
 
-        val dayList = dayInMonthArray(selectedData)
-        val dayOfToday= dayList.indexOf(date_week)
+        binding.mainDate1.text = ""
+        binding.mainDate2.text = ""
+        binding.mainDate3.text = ""
+        binding.mainDate4.text = ""
+        binding.mainDate5.text = "1"
+        binding.mainDate6.text = "2"
+        binding.mainDate7.text = "3"
 
-        val id_list = ArrayList<TextView>()
-        id_list.add(binding.mainDate1)
-        id_list.add(binding.mainDate2)
-        id_list.add(binding.mainDate3)
-        id_list.add(binding.mainDate4)
-        id_list.add(binding.mainDate5)
-        id_list.add(binding.mainDate6)
-        id_list.add(binding.mainDate7)
+        changeOrangeIcon("eat", binding.mainIcon5)
 
-        if (nWeek == 1) {
-            for (i in 0..6) {
-                id_list[i].text = dayList[dayOfToday + i]
-            }
-        } else if (nWeek == 7) {
-            for (i in 0..6) {
-                id_list[6 - i].text = dayList[dayOfToday - i]
-            }
-        } else {
-            for (i in 0 until nWeek) {
-                id_list[i].text = dayList[dayOfToday - nWeek + i + 1]
-            }
-            for (i in 0 until 7 - nWeek) {
-                id_list[nWeek + i].text = dayList[dayOfToday + i + 1]
-            }
-        }
+        changeOrangeIcon("run", binding.mainIcon6)
+
+        changeOrangeIcon("bite", binding.mainIcon7)
+
+
+
+
 
     }
 
