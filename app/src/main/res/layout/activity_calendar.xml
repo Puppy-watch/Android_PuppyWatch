@@ -8,17 +8,46 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <ImageView
-            android:id="@+id/calendar_back"
-            android:layout_width="40dp"
-            android:src="@drawable/ic_back"
-            android:layout_height="40dp"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"/>
+
+        <LinearLayout
+            android:id="@+id/calendar_title_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/calendar_go_main_iv"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="1dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_arrow_left" />
+
+            <TextView
+                android:id="@+id/calendar_go_main_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="7dp"
+                android:text="캘린더"
+                android:font="@font/roboto_bold"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -35,8 +64,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAlignment="center"
-                android:font="@font/roboto_bold"
                 android:text = "month"
+                android:font="@font/roboto_bold"
+                android:textColor="@color/black"
                 android:textSize="22sp" />
 
             <ImageView
@@ -52,6 +82,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -59,6 +90,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="일"
+                android:font="@font/roboto_bold"
+                android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textAlignment="center" />
 
@@ -67,6 +100,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="월"
+                android:font="@font/roboto_bold"
+                android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textAlignment="center" />
 
@@ -75,6 +110,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="화"
+                android:font="@font/roboto_bold"
+                android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textAlignment="center" />
 
@@ -83,6 +120,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="수"
+                android:font="@font/roboto_bold"
+                android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textAlignment="center" />
 
@@ -91,6 +130,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="목"
+                android:font="@font/roboto_bold"
+                android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textAlignment="center" />
 
@@ -99,6 +140,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="금"
+                android:font="@font/roboto_bold"
+                android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textAlignment="center" />
 
@@ -107,6 +150,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="토"
+                android:font="@font/roboto_bold"
+                android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textAlignment="center" />
 
@@ -116,6 +161,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:id = "@+id/recyler_View" />
 
 

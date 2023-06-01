@@ -1,6 +1,7 @@
 package com.example.puppywatch
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
@@ -56,6 +57,18 @@ class CalendarActivity : ComponentActivity(),OnItemListener {
             selectedData = selectedData.plusMonths(1)
 
             setMonthView()
+        }
+        binding.calendarGoMainIv.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+            finish()
+        }
+        binding.calendarGoMainTv.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+            finish()
         }
     }
     @RequiresApi(Build.VERSION_CODES.O)

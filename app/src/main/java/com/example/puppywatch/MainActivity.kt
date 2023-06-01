@@ -147,16 +147,17 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         binding.mainDate6.text = "2"
         binding.mainDate7.text = "3"
 
-        changeOrangeIcon("eat", binding.mainIcon5)
+        changeOrangeIcon("walk", binding.mainIcon5)
+        changeOrangeIcon("sleep", binding.mainIcon6)
 
-        changeOrangeIcon("run", binding.mainIcon6)
-
-        changeOrangeIcon("bite", binding.mainIcon7)
-
-
-
-
-
+        if (mostBehavList.isEmpty()) {
+            mostBehavList.add(ListData("2023-06-02", "sleep"))
+            mostBehavList.add(ListData("2023-06-01", "walk"))
+            mostBehavList.add(ListData("2023-05-30", "sleep"))
+            mostBehavList.add(ListData("2023-05-29", "walk"))
+            mostBehavList.add(ListData("2023-05-28", "seat"))
+            mostBehavList.add(ListData("2023-05-27", "stand"))
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

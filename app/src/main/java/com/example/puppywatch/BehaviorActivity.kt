@@ -34,12 +34,14 @@ class BehaviorActivity : AppCompatActivity(), AbnormalView {
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
+            finish()
         }
 
         binding.behaviorGoMainTv.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
+            finish()
         }
 
         // 레이아웃 매니저와 어댑터 설정

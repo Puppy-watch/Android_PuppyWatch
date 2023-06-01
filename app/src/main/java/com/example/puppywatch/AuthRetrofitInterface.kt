@@ -49,9 +49,15 @@ interface AuthRetrofitInterface {
     ) : Call<StatisticResponse>
 
     //마이페이지
-    @POST("/dogs/{dog_idx}")
+    @PUT("/dogs/{dog_idx}")
     fun mypage(
             @Path("dog_idx") dog_Idx: Int,
             @Body dog: Dog
     ): Call<MypageResponse>
+
+    //개인정보 확인
+    @GET("/dogs_info")
+    fun dogInfo(
+        @Query("dog_idx") dog_idx: Int
+    ) : Call<DogInfoResponse>
 }
