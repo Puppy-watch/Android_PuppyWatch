@@ -147,6 +147,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         binding.mainDate6.text = "2"
         binding.mainDate7.text = "3"
 
+        changeIcon("walk")
         changeOrangeIcon("walk", binding.mainIcon5)
         changeOrangeIcon("sleep", binding.mainIcon6)
 
