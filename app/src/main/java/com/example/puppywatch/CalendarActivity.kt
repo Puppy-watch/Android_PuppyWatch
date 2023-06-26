@@ -65,6 +65,7 @@ class CalendarActivity : ComponentActivity(),OnItemListener {
         val mostBehaviorList = MainActivity.mostBehavList
         val yearMonthText = yearMonthfromDate(selectedData)
         val dayList = dayInMonthArray(selectedData)
+        Log.d("CalendarActivity MostBehavior", mostBehaviorList.toString())
         val adapter = CalendarAdapter(sharedPreferences, dayList, this, yearMonthText, mostBehaviorList)
 
         var manager: RecyclerView.LayoutManager = GridLayoutManager(applicationContext,7)

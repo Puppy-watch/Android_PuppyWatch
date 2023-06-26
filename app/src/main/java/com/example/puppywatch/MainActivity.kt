@@ -219,6 +219,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         Log.d("MostBehaviorSuccess", "성공")
         makeWeekIcon(data)
         mostBehavList.addAll(data)
+        Log.d("MostBehaviorListSuccess", mostBehavList.toString())
     }
     override fun onMostBehaviorFailure() {
         Log.d("MostBehaviorFailure", "실패")
