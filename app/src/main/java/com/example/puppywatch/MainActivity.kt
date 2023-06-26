@@ -77,7 +77,6 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
 
         })
 
-
         // dog_idx 가져오기
         val sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
         dog_idx = sharedPreferences.getInt("dog_idx", 0)
@@ -118,56 +117,86 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
     fun weekView(){
 
         val cal = Calendar.getInstance()
-        val df: DateFormat = SimpleDateFormat("dd")
-        val currentDate = cal.time
-        val date_week = df.format(currentDate)
 
-        val nWeek: Int = cal.get(Calendar.DAY_OF_WEEK)
-        val day_list = ArrayList<String>()
-
-        val month_of_year = cal.get(Calendar.MONTH)+1
+        //n월 n번째주
+        var month_of_year = cal.get(Calendar.MONTH)+1
         val week_of_month = cal.get(Calendar.WEEK_OF_MONTH)
 
+        //날짜 담을 리스트
+        var day_list = ArrayList<String>()
+        var first_week = ArrayList<String>()
+        var second_week = ArrayList<String>()
+        var third_week = ArrayList<String>()
+        var fourth_week = ArrayList<String>()
+        var fifth_week = ArrayList<String>()
+        var sixth_week = ArrayList<String>()
+
         //N월 N째주
+        if (month_of_year == 13){
+            month_of_year = 1
+        }
         binding.weekday.text = month_of_year.toString() + "월 "+week_of_month.toString()+"번째 주"
 
-        for (i in 0..14) {
-            val calendar = cal.clone() as Calendar
-            calendar.add(Calendar.DATE, i-7)
-            val date_data = calendar.time
-            val formattedDate = df.format(date_data)
-            day_list.add(formattedDate)
+        //위클리 텍스트뷰 리스트에 넣기
+        val weekText_list = ArrayList<TextView>()
+        weekText_list.add(binding.mainDate1)
+        weekText_list.add(binding.mainDate2)
+        weekText_list.add(binding.mainDate3)
+        weekText_list.add(binding.mainDate4)
+        weekText_list.add(binding.mainDate5)
+        weekText_list.add(binding.mainDate6)
+        weekText_list.add(binding.mainDate7)
+
+        day_list = dayInMonthArray(selectedData)
+
+        for(i in 0..6){
+            first_week.add(day_list[i])
+            second_week.add(day_list[i+7])
+            third_week.add(day_list[i+14])
+            fourth_week.add(day_list[i+21])
+            fifth_week.add(day_list[i+28])
+            //sixth_week.add(day_list[i+35])
         }
+        Log.d("first",first_week.toString())
+        Log.d("second",second_week.toString())
+        Log.d("third",third_week.toString())
+        Log.d("fourth",fourth_week.toString())
+        Log.d("fifth",fifth_week.toString())
+        //Log.d("sixth",sixth_week.toString())
 
-        val dayList = dayInMonthArray(selectedData)
-        val dayOfToday= dayList.indexOf(date_week)
-
-        val id_list = ArrayList<TextView>()
-        id_list.add(binding.mainDate1)
-        id_list.add(binding.mainDate2)
-        id_list.add(binding.mainDate3)
-        id_list.add(binding.mainDate4)
-        id_list.add(binding.mainDate5)
-        id_list.add(binding.mainDate6)
-        id_list.add(binding.mainDate7)
-
-        if (nWeek == 1) {
-            for (i in 0..6) {
-                id_list[i].text = dayList[dayOfToday + i]
+        //몇째주인지 체크해서 그 주의 위클리 캘린더 보냄
+        when (week_of_month){
+            1 -> {
+                for (i in 0..6){
+                    weekText_list[i].text = first_week[i]
+                }
             }
-        } else if (nWeek == 7) {
-            for (i in 0..6) {
-                id_list[6 - i].text = dayList[dayOfToday - i]
+            2 -> {
+                for (i in 0..6){
+                    weekText_list[i].text = first_week[i]
+                }
             }
-        } else {
-            for (i in 0 until nWeek) {
-                id_list[i].text = dayList[dayOfToday - nWeek + i + 1]
+            3 -> {
+                for (i in 0..6){
+                    weekText_list[i].text = second_week[i]
+                }
             }
-            for (i in 0 until 7 - nWeek) {
-                id_list[nWeek + i].text = dayList[dayOfToday + i + 1]
+            4 -> {
+                for (i in 0..6){
+                    weekText_list[i].text = third_week[i]
+                }
+            }
+            5 -> {
+                for (i in 0..6){
+                    weekText_list[i].text = fourth_week[i]
+                }
+            }
+            else -> {
+                for (i in 0..6){
+                    weekText_list[i].text = fifth_week[i]
+                }
             }
         }
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -177,6 +206,7 @@ class MainActivity : AppCompatActivity(), NowBehaviorView, MostBehaviorView {
         var yearMonth = YearMonth.from(date)
         var firstDay = date.withDayOfMonth(1)
         var lastDay = yearMonth.lengthOfMonth()
+        //1일의 요일값
         var dayOfWeek = firstDay.dayOfWeek.value
 
         for (i in 1..41) {

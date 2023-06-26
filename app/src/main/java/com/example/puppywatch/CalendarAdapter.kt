@@ -83,8 +83,8 @@ class CalendarAdapter(private val sharedPreferences: SharedPreferences, private 
         holder.itemView.setOnClickListener {
             onItemListener.onItemClick(day)
         }
-        Log.d("position", position.toString())
-        Log.d("itemCount", itemCount.toString())
+        Log.d("&&item Count", itemCount.toString())
+        Log.d("&&position", position.toString())
         if (position == itemCount - 1) {
             makeCalendarIcon(holderList, mostBehavList)
             Log.d("###MOSTBEHAVLIST###", mostBehavList.toString())
@@ -117,12 +117,12 @@ class CalendarAdapter(private val sharedPreferences: SharedPreferences, private 
      */
 
     fun makeCalendarIcon(holders: ArrayList<ItemViewHolder>, data: List<ListData>){
-        Log.d("***holderList",holders.toString())
-        Log.d("***dataList",data.toString())
+
         //날짜와 일치하는 통계 데이터 있으면 아이콘 변경
         for(holder in holders){
-            if ((holder.day_Text.text != "")){
-                for(item in data){
+            for(item in data){
+                if ((holder.day_Text.text != "")){
+
                     if ((holder.day_Text.text.toString().toInt()) < 10) {
                         if(item.Date == yearMonth + "0" + holder.day_Text.text){
                             changeOrangeIcon(item.mostBehav,holder.act_icon)
